@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# Si le fichier ou le dossier existe, on l'affiche directement (CSS, images)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Sinon, on envoie tout à index.php
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
