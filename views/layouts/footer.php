@@ -1,6 +1,6 @@
         </main> 
 
-        <footer class="main-footer">
+        <footer class="main-footer text-center py-4">
             <p>&copy; <?= date('Y') ?> MonBook - Tous droits réservés.</p>
         </footer>
 

@@ -5,6 +5,7 @@
     --second-bg-color: #FAF9F7;
     --grey-text-color: #A6A6A6;
     --light-green-color: #00AC66;
+    --dark-green-color: #006D41;
 }
 
 /* ------------ Global ---------- */
@@ -15,8 +16,12 @@ body{
     background-color: #FFFFFF;
 }
 
-h1{
+h1, h2, h3, h4, h5, h6{
+    color: black;
     font-family: Playfair Display, serif;
+}
+
+h1{
     font-weight: 200;
     font-size: 36px;
 }
@@ -39,14 +44,40 @@ h1{
     background-color: var(--main-bg-color);
 }
 
-.green-button{
-    background-color: var(--light-green-color);
-    color: white;
-    border: none;
+.second-bg-color{
+    background-color: var(--second-bg-color);
+}   
+
+.classic-button{
     border-radius: 8px;
     padding: 15px 30px;
     font-size: 16px;
     font-weight: 500;
+}
+
+.green-button{
+    background-color: var(--light-green-color);
+    color: white;
+    border: 1px solid var(--light-green-color);
+    transition-duration: 0.5s;
+}
+
+.secondary-green-button{
+    background-color: transparent;
+    color: var(--light-green-color);
+    border: 1px solid var(--light-green-color);
+    transition-duration: 0.5s;
+}
+
+.green-button:hover, .secondary-green-button:hover{
+    background-color: var(--dark-green-color);
+    border: 1px solid var(--dark-green-color);
+    color: white;
+    cursor: pointer;
+}
+
+.max-width-1000{
+    max-width: 1000px;
 }
 
 /* ----- Navbar ----- */
@@ -122,14 +153,6 @@ h1{
 
 /* ----- Home ----- */
 
-.section-content{
-    width: 80%;
-    max-width: 1000px;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    padding: 100px 20px;
-}
 
 #home-image{
     width: 400px;
@@ -141,10 +164,48 @@ h1{
     margin: auto;
 }
 
-.author-name{
+.italic-text{
     font-style: italic;
     font-size: 12px;
     margin: 10px;
-    text-align: right;
     color: var(--grey-text-color);
+}
+
+.home-help-blocs{
+    width: 200px;
+}
+
+.home-help-blocs p{
+    font-size: 14px;
+    padding: 40px 10px;
+}
+
+#nos-valeurs{
+    width: 400px;
+    height: auto;
+}
+
+#nos-valeurs img{
+    position: relative;
+    bottom: 0px;
+    right: -350px;
+}
+
+@media (max-width: 576px) {
+    #nos-valeurs img{
+        margin-top: 40px;
+        position: relative;
+        bottom: 0px;
+        right: -150px;
+    }
+
+    .home-help-blocs{
+        width: 100%;
+    }
+}
+
+@media (min-width:576px) and (max-width: 992px) {
+    .home-help-blocs{
+        width: 48%;
+    }
 }
