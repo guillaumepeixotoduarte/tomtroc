@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 define('ROOT', dirname(__DIR__));
 define('BASE_URL', '/book/public');
 
@@ -14,6 +16,41 @@ switch ($url) {
     case 'home':
         $controller = new HomeController();
         $controller->index();
+        break;
+
+    case 'profile':
+        require_once '../app/Controllers/UserController.php';
+        $controller = new UserController();
+        $controller->profile();
+        break;
+
+    case 'login':
+        require_once '../app/Controllers/UserController.php';
+        $controller = new UserController();
+        $controller->login();
+        break;
+
+    case 'login/user':
+        require_once '../app/Controllers/UserController.php';
+        $controller = new UserController();
+        $controller->auth();
+        break;
+
+    case 'logout':
+        session_destroy();
+        redirect('home');
+        break;
+
+    case 'inscription':
+        require_once '../app/Controllers/UserController.php';
+        $controller = new UserController();
+        $controller->register();
+        break;
+
+    case 'inscription/save':
+        require_once '../app/Controllers/UserController.php';
+        $controller = new UserController();
+        $controller->save();
         break;
     
     case 'nos-livres':

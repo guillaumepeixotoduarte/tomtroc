@@ -10,19 +10,54 @@
     <body>
 
         <header class="main-header">
-            <nav class="navbar">
-                <div class="logo">
-                    <img src="img/logo.png" alt="Tom Book">
+            <nav class="navbar navbar-expand-lg navbar-light main-bg-color">
+                <div class="container-fluid">
+                    <a class="navbar-brand ms-5 ps-5" href="<?= url('') ?>">
+                        <img src="img/logo.png" id="logo-nav" alt="Logo" class="">
+                    </a>
+
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item mx-3">
+                                <a class="nav-link <?= navBarIsActive('home') ?>" href="<?= url('home') ?>">Accueil</a>
+                            </li>
+                            <li class="nav-item mx-3">
+                                <a class="nav-link <?= navBarIsActive('nos-livres') ?>" href="<?= url('nos-livres') ?>">Nos livres à l'échange</a>
+                            </li>
+
+                        </ul>
+
+                        <?php if(!empty($_SESSION['user'])): ?>
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?= url('messages') ?>">Messagerie</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?= url('profil') ?>">Mon Profil</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?= url('logout') ?>">Déconnexion</a>
+                                </li>
+                            </ul>
+                        <?php else: ?>
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?= url('inscription') ?>">Inscription</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?= url('login') ?>">Connexion</a>
+                                </li>
+                            </ul>
+                        <?php endif; ?>
+                    </div>
                 </div>
-                <button class="burger-menu" id="burger-btn">
-                    <span></span><span></span><span></span>
-                </button>
-                <ul class="nav-links" id="nav-menu">
-                    <li><a href="/">Accueil</a></li>
-                    <li><a href="/livres">Nos livres à l'échange</a></li>
-                    <li><a href="/contact">Contact</a></li>
-                </ul>
             </nav>
+
+
         </header>
 
         <main>
