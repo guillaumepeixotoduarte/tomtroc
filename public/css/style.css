@@ -76,83 +76,11 @@ h1{
 
 /* ----- Navbar ----- */
 
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: var(--main-bg-color);
-    color: black;
-    padding: 1rem 10rem;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.logo img{
+#logo-nav{
     height: 40px;
 }
 
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 20px;
-}
-
-.nav-links a {
-    color: black;
-    text-decoration: none;
-}
-
-.burger-menu {
-    display: none; /* Caché sur PC */
-    flex-direction: column;
-    gap: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.burger-menu span {
-    width: 25px;
-    height: 3px;
-    background: white;
-}
-
-/* --- Mobile Style (< 768px) --- */
-@media (max-width: 768px) {
-    .burger-menu { display: flex; }
-
-    .nav-links {
-        display: none; /* On cache le menu par défaut */
-        flex-direction: column;
-        position: absolute;
-        top: 100%; /* Juste en dessous du header */
-        left: 0;
-        width: 100%;
-        background: #444;
-        padding: 1rem;
-        text-align: center;
-    }
-
-    /* La classe qui sera ajoutée en JS */
-    .nav-links.active {
-        display: flex;
-        animation: slideDown 0.3s ease-out;
-    }
-}
-
-@keyframes slideDown {
-    from { transform: translateY(-10px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
 /* ----- Home ----- */
-
-
-#home-image{
-    width: 400px;
-    height: auto;
-}
 
 .section-text-content{
     width: 320px;
@@ -213,5 +141,9 @@ h1{
 @media (min-width:576px) and (max-width: 992px) {
     .home-help-blocs{
         width: 48%;
+    }
+
+    .image-wrapper{
+        width: 50%;
     }
 }

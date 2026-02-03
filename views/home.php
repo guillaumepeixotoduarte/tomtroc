@@ -1,9 +1,9 @@
 <?php include_once ROOT. '/views/layouts/header.php'; ?>
 
 <section class="main-bg-color">
-    <div class="container-fluid px-0 mx-auto px-md-2 py-5 d-flex align-items-center " style="max-width: 1000px;">
+    <div class="container-fluid px-0 mx-auto px-md-2 pt-0 pt-sm-5 pb-5 d-flex align-items-center " style="max-width: 1000px;">
         <div class="row w-100 m-0 flex-wrap-reverse"> 
-            <div class="section-text-content col-12 col-lg-6 px-4 px-sm-0 mt-5 mt-lg-auto">
+            <div class="section-text-content col-12 col-lg-6 px-4 px-sm-0 my-5 my-lg-auto">
                 <h1>Rejoignez nos lecteurs passionnés</h1>
                 <p>Donnez une nouvelle vie à vos livres en les échangeant avec d'autres amoureux de la lecture. Nous croyons en la magie du partage de connaissances et d'histoires à travers les livres. </p>
                 <button class="classic-button green-button mt-3 w-100 w-sm-auto">Découvrir</button>
@@ -11,7 +11,7 @@
 
             <div class="col-12 col-lg-6 d-flex flex-column align-items-center align-items-lg-end p-0">
                 <div class="image-wrapper">
-                    <img id="home-image" src="img/home_image.png" alt="Echange de livres" class="img-fluid"> 
+                    <img src="img/home_image.png" alt="Echange de livres" class="img-fluid"> 
                     <p class="italic-text text-end w-100 my-2 mx-0 pe-2 pe-sm-0">Hamza</p>
                 </div>
             </div>
@@ -43,7 +43,7 @@
         <button class="classic-button secondary-green-button mt-3 w-100 w-sm-auto">Voir tous les livres</button>
     </div>
     <img class="d-none d-sm-block w-100 object-fit-cover" src="img/second_home_image.png" alt="Echange de livres">
-    <img class="second-home-image w-100 d-sm-none" src="img/second_home_phone_image.png" alt="Echange de livres">
+    <img class="w-100 d-sm-none" src="img/second_home_phone_image.png" alt="Echange de livres">
     <div id="nos-valeurs" class="py-5 px-4 px-lg-0 mx-auto">
         <h2 class="mb-4">Nos valeurs</h2>
         <p>
