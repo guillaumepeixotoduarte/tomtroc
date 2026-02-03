@@ -28,6 +28,10 @@ h1{
 
 /* -------- Classe global ------- */
 
+.font-size-14{
+    font-size: 14px;
+}
+
 .main-bg-color{
     background-color: var(--main-bg-color);
 }
@@ -87,10 +91,8 @@ h1{
     margin: auto;
 }
 
-.italic-text{
-    font-style: italic;
+.grey-text{
     font-size: 12px;
-    margin: 10px;
     color: var(--grey-text-color);
 }
 

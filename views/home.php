@@ -10,7 +10,7 @@
             <div class="col-12 col-lg-6 d-flex flex-column align-items-center align-items-lg-end p-0">
                 <div class="image-wrapper">
                     <img src="img/home_image.png" alt="Echange de livres" class="img-fluid"> 
-                    <p class="italic-text text-end w-100 my-2 mx-0 pe-2 pe-sm-0">Hamza</p>
+                    <p class="grey-text fst-italic text-end w-100 my-2 mx-0 pe-2 pe-sm-0">Hamza</p>
                 </div>
             </div>
             
@@ -53,7 +53,7 @@
             <br><br>
             Nous sommes passionnés par la création d'une plateforme conviviale qui permet aux lecteurs de se connecter, de partager leurs découvertes littéraires et d'échanger des livres qui attendent patiemment sur les étagères.
         </p>
-        <p class="italic-text">L'équipe Tom Troc</p>
+        <p class="grey-text fst-italic">L'équipe Tom Troc</p>
         <img src="img/heart.png" alt="Heart Icon">
         
     </div>
