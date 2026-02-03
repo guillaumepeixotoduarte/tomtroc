@@ -26,18 +26,6 @@ h1{
     font-size: 36px;
 }
 
-.mt-1{
-    margin-top: 0.25rem;
-}
-
-.mt-2{
-    margin-top: 0.5rem;
-}
-
-.mt-3{
-    margin-top: 0.75rem;
-}
-
 /* -------- Classe global ------- */
 
 .main-bg-color{
@@ -80,7 +68,14 @@ h1{
     max-width: 1000px;
 }
 
+@media (min-width: 576px) {
+    .w-sm-auto{
+        width: auto !important;
+    }
+}
+
 /* ----- Navbar ----- */
+
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -186,20 +181,31 @@ h1{
 }
 
 #nos-valeurs img{
-    position: relative;
-    bottom: 0px;
-    right: -350px;
+    display: flex;
+    margin-left: auto;
+    margin-right: -70px;
 }
 
 @media (max-width: 576px) {
+
+    #nos-valeurs{
+        width: 100%;
+    }
+
     #nos-valeurs img{
-        margin-top: 40px;
-        position: relative;
-        bottom: 0px;
-        right: -150px;
+        margin: 0 auto;
+    }
+
+    #home-image{
+        width: 100%;
+        margin: 0 auto;
     }
 
     .home-help-blocs{
+        width: 100%;
+    }
+
+    .section-text-content{
         width: 100%;
     }
 }
