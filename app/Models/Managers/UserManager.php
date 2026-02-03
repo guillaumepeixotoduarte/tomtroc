@@ -1,6 +1,11 @@
 <?php
 
+namespace App\Managers;
+
 require_once ROOT . '/app/Core/Database.php';
+
+use App\Core\Database;
+use App\Models\User;
 
 class UserManager {
     private $db;
@@ -37,7 +42,25 @@ class UserManager {
         $sql = "SELECT * FROM users WHERE email = :email";
         $stmt = $this->db->prepare($sql);
         $stmt->execute(['email' => $email]);
+
+        $user = $stmt->fetch();
+        if($user){
+            return new User($user);
+        }
         
-        return $stmt->fetch();
+        return null;
+    }
+
+    public function findById($id) {
+        $sql = "SELECT * FROM users WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(['id' => $id]);
+
+        $user = $stmt->fetch();
+        if($user){
+            return new User($user);
+        }
+        
+        return null;
     }
 }
