@@ -1,5 +1,3 @@
-<?php include_once ROOT. '/views/layouts/header.php'; ?>
-
 <section class="main-bg-color">
     <div class="container-fluid px-0 mx-auto px-md-2 pt-0 pt-sm-5 pb-5 d-flex align-items-center " style="max-width: 1000px;">
         <div class="row w-100 m-0 flex-wrap-reverse"> 
@@ -60,5 +58,3 @@
         
     </div>
 </section>
-
-<?php include_once ROOT. '/views/layouts/footer.php'; ?>
