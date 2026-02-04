@@ -38,7 +38,7 @@
             <div class="bg-white d-flex rounded-3 home-help-blocs my-2"><p class="m-auto">Parcourez les livres <br> disponibles chez d'autres <br> membres.</p></div>
             <div class="bg-white d-flex rounded-3 home-help-blocs my-2"><p class="m-auto">Proposez un échange et <br> discutez avec d'autres <br> passionnés de lecture.</p></div>
         </div>
-        <button class="classic-button secondary-green-button mt-3 w-100 w-sm-auto">Voir tous les livres</button>
+        <button class="classic-button secondary-green-button bg-white mt-3 w-100 w-sm-auto">Voir tous les livres</button>
     </div>
     <img class="d-none d-sm-block w-100 object-fit-cover" src="img/second_home_image.png" alt="Echange de livres">
     <img class="w-100 d-sm-none" src="img/second_home_phone_image.png" alt="Echange de livres">
