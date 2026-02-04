@@ -36,4 +36,16 @@ class BookManager {
 
         return $row ? new Book($row) : null;
     }
+
+    public function findAllByIdUser(int $userId): array {
+        $stmt = $this->db->prepare("SELECT * FROM books WHERE user_id = ?");
+        $stmt->execute([$userId]);
+        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        
+        $books = [];
+        foreach ($rows as $row) {
+            $books[] = new Book($row);
+        }
+        return $books;
+    }
 }
