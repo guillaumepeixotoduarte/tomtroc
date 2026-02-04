@@ -7,21 +7,15 @@ define('BASE_URL', '/book/public');
 
 require_once '../app/Core/Helpers.php';
 
-require_once '../app/Controllers/HomeController.php';
-require_once '../app/Controllers/BookController.php';
-
 $url = $_GET['url'] ?? 'home';
+$url = rtrim($url, '/');
+$params = explode('/', $url);
 
-$protected_routes = ['profile', 'add-book', 'login/user', 'logout', 'dashboard'];
+checkAccessNotLogged($params[0], $params[1] ?? 'index');
 
-if (in_array($url, $protected_routes) && !isLogged()) {
-    $_SESSION['error'] = "Accès refusé. Veuillez vous connecter.";
-    header('Location: ' . url('/login'));
-    exit;
-}
-
-switch ($url) {
+switch ($params[0]) {
     case 'home':
+        require_once '../app/Controllers/HomeController.php';
         $controller = new HomeController();
         $controller->index();
         break;
@@ -35,10 +29,10 @@ switch ($url) {
     case 'login':
         require_once '../app/Controllers/UserController.php';
         $controller = new UserController();
-        $controller->login();
+        $controller->login_page();
         break;
 
-    case 'login/user':
+    case 'login-user':
         require_once '../app/Controllers/UserController.php';
         $controller = new UserController();
         $controller->auth();
@@ -55,10 +49,32 @@ switch ($url) {
         $controller->register();
         break;
 
-    case 'inscription/save':
+    case 'inscription-save':
         require_once '../app/Controllers/UserController.php';
         $controller = new UserController();
-        $controller->save();
+        $controller->saveUser();
+        break;
+
+    case 'book':
+
+        require_once ROOT . '/app/Controllers/BookController.php';
+        $controller = new BookController();
+        $action = $params[1] ?? 'edit'; // Action par défaut si vide
+
+        if ($action === 'edit') {
+            // On récupère l'ID s'il existe dans le 3ème segment ($params[2])
+            $id = (isset($params[2]) && is_numeric($params[2])) ? $params[2] : null; 
+            $controller->edit($id);
+        } 
+        elseif ($action === 'save-book'){
+            $controller->saveBook();
+            break;
+        }
+        elseif ($action === 'delete') {
+            // $id = $params[2] ?? null;
+            // $controller->delete($id);
+            echo "Suppression du livre (à implémenter)";
+        }
         break;
     
     case 'nos-livres':
