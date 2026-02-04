@@ -1,8 +1,10 @@
 <?php
 
-require_once ROOT . '/app/Models/Book.php';
-require_once ROOT . '/app/Models/BookManager.php';
+require_once ROOT . '/app/Models/Entities/Book.php';
+require_once ROOT . '/app/Models/Managers/BookManager.php';
 require_once ROOT . '/app/Core/Controller.php';
+
+use App\Core\Controller;
 
 class HomeController extends Controller {
     public function index() {
