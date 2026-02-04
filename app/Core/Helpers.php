@@ -32,4 +32,8 @@
         return trim($currentPath, '/') === trim($pagePath, '/') ? 'active fw-semibold' : '';
     }
 
+    function isLogged(): bool {
+        return isset($_SESSION['user']) && !empty($_SESSION['user']);
+    }
+
 ?>

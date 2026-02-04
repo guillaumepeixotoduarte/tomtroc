@@ -12,6 +12,14 @@ require_once '../app/Controllers/BookController.php';
 
 $url = $_GET['url'] ?? 'home';
 
+$protected_routes = ['profile', 'add-book', 'login/user', 'logout', 'dashboard'];
+
+if (in_array($url, $protected_routes) && !isLogged()) {
+    $_SESSION['error'] = "Accès refusé. Veuillez vous connecter.";
+    header('Location: ' . url('/login'));
+    exit;
+}
+
 switch ($url) {
     case 'home':
         $controller = new HomeController();
