@@ -2,7 +2,7 @@
     <div class="max-width-1000 mx-auto">
         <h2 class="py-4 px-0">Mon compte</h2>
         <div class="row">
-            <div class="col-12 col-lg-6 pe-3">
+            <div class="col-12 col-lg-6 pe-lg-3">
                 <div class="d-flex justify-content-center align-items-center flex-column p-3 bg-white rounded-4 h-100">
                     <div class="d-flex flex-column align-items-center justify-content-center my-4">
                         <img src="<?= !empty($user->getProfilImage()) ? $user->getProfilImage() : 'img/default-profil-image.png' ?>" alt="Icône utilisateur" class="mb-1" style="width: 100px;">
@@ -18,7 +18,7 @@
                 </div>
             </div>
             
-            <div class="col-12 col-lg-6 ps-3">
+            <div class="col-12 col-lg-6 ps-lg-3">
                 <div class="p-sm-5 p-4 bg-white rounded-4 mt-4 mt-lg-0 h-100">
                     <form class="px-md-5 px-sm-2 px-0" method="post" action="<?= url('/profile/update') ?>">
                         <h5 class="mb-4">Vos informations personnelles</h5>
@@ -39,44 +39,35 @@
                 </div>            
             </div>
         </div>
-        <div class="mt-3 bg-white rounded-4">
-            <?php if (!empty($books)): ?>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">PHOTO</th>
-                            <th scope="col">TITRE</th>
-                            <th scope="col">AUTEUR</th>
-                            <th scope="col">DESCRIPTION</th>
-                            <th scope="col">DISPONIBILITE</th>
-                            <th scope="col">ACTION</th>
-                        </tr>
-                    </thead>
-                    <tbody class="table-group-divider">
-                        <?php foreach($books as $book): ?>
-                            <tr>
-                                <td><img src="<?= !empty($book->getCoverImage()) ? $book->getCoverImage() : 'img/default-book-cover.png' ?>" alt="Cover Image" style="width: 50px;"></td>
-                                <td><?= htmlspecialchars($book->getTitle()) ?></td>
-                                <td><?= htmlspecialchars($book->getAuthor()) ?></td>
-                                <td><?= htmlspecialchars($book->getDescription()) ?></td>
-                                <td><span class="<?= $book->isAvailable() ? 'bg-teal-400' : 'bg-red-400' ?> text-white px-2 py-1 rounded"><?= $book->isAvailable() ? 'Disponible' : 'Indisponible' ?></span></td>
-                                <td>
-                                    <form method="get" action="<?= url('/profile/edit-book') ?>">
-                                        <input type="hidden" name="book_id" value="<?= $book->getId() ?>">
-                                        <input type="submit" class="btn btn-primary btn-sm me-2" value="Éditer">
-                                    </form>
-                                    <form method="post" action="<?= url('/profile/delete-book') ?>" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">
-                                        <input type="hidden" name="book_id" value="<?= $book->getId() ?>">
-                                        <input type="submit" class="btn btn-danger btn-sm" value="Supprimer">
-                                    </form>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            <?php else: ?>
-                <p class="p-4">Vous n'avez pas encore ajouté de livres à votre bibliothèque. <a href="<?= url('/add-book') ?>">Ajoutez-en un maintenant !</a></p>
-            <?php endif; ?>
+
+        <?php if (!empty($books)): ?>
+            <div class="mt-5 bg-white rounded-4">
+                <div class="profil-book-list col-12 pt-4 mb-1 row flex-row font-size-8 fw-semibold">
+                    <div class="col-2">PHOTO</div>
+                    <div class="col-2">TITRE</div>
+                    <div class="col-2">AUTEUR</div>
+                    <div class="col-2">DESCRIPTION</div>
+                    <div class="col-2">DISPONIBILITE</div>
+                    <div class="col-2">ACTION</div>
+                </div>
+                <hr class="col-12 my-1 grey-text">
+                <?php foreach($books as $book): ?>
+                    <div class="profil-book-list col-12 py-4 row flex-row">
+                        <div class="col-2 d-flex align-items-center"><img src="<?= getBookImageUrl($book->getImage()) ?>" class="img-fluid table-image-column" alt="Image du livre : <?= $book->getTitle() ?>"></div>
+                        <div class="col-2 d-flex align-items-center"><?= htmlspecialchars($book->getTitle()) ?></div>
+                        <div class="col-2 d-flex align-items-center"><?= htmlspecialchars($book->getAuthor()) ?></div>
+                        <div class="col-2 d-flex align-items-center"><?= htmlspecialchars( truncate($book->getDescription())) ?></div>
+                        <div class="col-2 d-flex align-items-center"><span class="<?= $book->getStatutExchange() ? 'disponible-badge' : 'indisponible-badge' ?>"><?= $book->getStatutExchange() ? 'Disponible' : 'Indisponible' ?></span></div>
+                        <div class="col-2 d-flex justify-content-between align-items-center flex-wrap">
+                            <a href="<?= url('book/edit/'.$book->getId()) ?>" class="text-black text-decoration-underline">Éditer</a>
+                            <a href="<?= url('/profile/delete-book/' . $book->getId()) ?>" class="text-danger text-decoration-underline" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">Supprimer </a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php else: ?>
+            <p class="p-4">Vous n'avez pas encore ajouté de livres à votre bibliothèque. <a href="<?= url('/book/edit') ?>">Ajoutez-en un maintenant !</a></p>
+        <?php endif; ?>
         </div>
     </div>
 </div>

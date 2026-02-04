@@ -49,6 +49,10 @@ h1{
     background-color: var(--light-blue-color);
 }
 
+.cursor-pointer{
+    cursor: pointer;
+}
+
 .classic-button{
     border-radius: 8px;
     padding: 15px 30px;
@@ -156,4 +160,30 @@ h1{
     .image-wrapper{
         width: 50%;
     }
+}
+
+/* ------- Profil ------- */
+
+.table-image-column {
+    max-width: 100px;
+}
+
+.disponible-badge {
+    background-color: #6DC5A1;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+
+.indisponible-badge {
+    background-color: #C56D6D;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+
+.profil-book-list{
+    padding: 0 50px;
 }
