@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Core;
+
 abstract class Controller {
     /**
      * Affiche une vue avec des données
