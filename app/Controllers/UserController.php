@@ -1,8 +1,12 @@
 <?php
 
-require_once ROOT . '/app/Models/User.php';
-require_once ROOT . '/app/Models/UserManager.php';
+require_once ROOT . '/app/Models/Entities/User.php';
+require_once ROOT . '/app/Models/Managers/UserManager.php';
 require_once ROOT . '/app/Core/Controller.php';
+
+use App\Managers\BookManager;
+use App\Managers\UserManager;
+use App\Core\Controller;
 
 class UserController extends Controller {
     
@@ -19,8 +23,16 @@ class UserController extends Controller {
     }
 
     public function profile() {
+
+        $userManager = new UserManager();
+        $bookManager = new BookManager();
+        $user = $userManager->findById($_SESSION['user']['id']);
+        $books = $bookManager->findAllByIdUser($user->getId());
+
         $this->render('profile', [
-            'title' => 'Profil utilisateur'
+            'title' => 'Profil utilisateur',
+            'user' => $user,
+            'books' => $books
         ]);
     }
 
@@ -33,17 +45,17 @@ class UserController extends Controller {
             $user = $userManager->findByEmail($email);
 
             // On vérifie si l'utilisateur existe ET si le mot de passe est correct
-            if ($user && password_verify($password, $user['password'])) {
+            if ($user && password_verify($password, $user->getPassword())) {
                 
                 // STOCKAGE EN SESSION
                 // On ne stocke pas le mot de passe en session par sécurité
                 $_SESSION['user'] = [
-                    'id' => $user['id'],
-                    'username' => $user['username'],
-                    'role' => $user['role']
+                    'id' => $user->getId(),
+                    'username' => $user->getUsername(),
+                    'role' => $user->getRole()
                 ];
 
-                $_SESSION['success'] = "Ravi de vous revoir, " . $user['username'] . " !";
+                $_SESSION['success'] = "Ravi de vous revoir, " . $user->getUsername() . " !";
                 redirect('/profile');
             } else {
                 $_SESSION['error'] = "Identifiants invalides.";
