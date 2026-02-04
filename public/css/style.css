@@ -4,6 +4,7 @@
     --main-bg-color: #F5F3EF;
     --second-bg-color: #FAF9F7;
     --grey-text-color: #A6A6A6;
+    --light-blue-color: #EDF2F6;
     --light-green-color: #00AC66;
     --dark-green-color: #006D41;
 }
@@ -32,13 +33,21 @@ h1{
     font-size: 14px;
 }
 
+.font-size-8{
+    font-size: 8px;
+}
+
 .main-bg-color{
     background-color: var(--main-bg-color);
 }
 
 .second-bg-color{
     background-color: var(--second-bg-color);
-}   
+} 
+
+.light-blue-bg-color{
+    background-color: var(--light-blue-color);
+}
 
 .classic-button{
     border-radius: 8px;
@@ -55,16 +64,15 @@ h1{
 }
 
 .secondary-green-button{
-    background-color: transparent;
     color: var(--light-green-color);
     border: 1px solid var(--light-green-color);
     transition-duration: 0.5s;
 }
 
 .green-button:hover, .secondary-green-button:hover{
-    background-color: var(--dark-green-color);
-    border: 1px solid var(--dark-green-color);
-    color: white;
+    background-color: var(--dark-green-color) !important;
+    border: 1px solid var(--dark-green-color) !important;
+    color: white !important;
     cursor: pointer;
 }
 
