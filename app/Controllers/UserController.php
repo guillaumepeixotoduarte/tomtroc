@@ -2,6 +2,7 @@
 
 require_once ROOT . '/app/Models/Entities/User.php';
 require_once ROOT . '/app/Models/Managers/UserManager.php';
+require_once ROOT . '/app/Models/Managers/BookManager.php';
 require_once ROOT . '/app/Core/Controller.php';
 
 use App\Managers\BookManager;
@@ -16,7 +17,7 @@ class UserController extends Controller {
         ]);
     }
 
-    public function login() {
+    public function login_page() {
         $this->render('login', [
             'title' => 'Se connecter'
         ]);
@@ -64,7 +65,7 @@ class UserController extends Controller {
         }
     }
 
-    public function save() {
+    public function saveUser() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // 1. Récupération et nettoyage
             $username = trim(htmlspecialchars($_POST['pseudo']));
