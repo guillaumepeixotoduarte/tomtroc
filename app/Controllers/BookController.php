@@ -33,7 +33,7 @@ class BookController extends Controller {
             // Sécurité : on vérifie que le livre appartient bien à l'utilisateur connecté
             if (!$book || $book->getUserId() !== $_SESSION['user']['id']) {
                 $_SESSION['error'] = "Livre introuvable ou accès refusé.";
-                redirect('profile');
+                redirect(path: 'my-profile');
             }
         }
 
@@ -60,7 +60,7 @@ class BookController extends Controller {
         // On passe $_POST pour les textes et $_FILES pour l'image
         if ($bookManager->save($_POST, $_FILES['cover_image'])) {
             $_SESSION['success'] = "Livre enregistré avec succès !";
-            redirect('profile');
+            redirect('my-profile');
         } else {
             $_SESSION['error'] = "Une erreur est survenue.";
             redirect('book/edit' . (isset($_POST['id']) ? '/' . $_POST['id'] : ''));

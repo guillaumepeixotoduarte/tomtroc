@@ -30,7 +30,7 @@ class UserController extends Controller {
         $user = $userManager->findById($_SESSION['user']['id']);
         $books = $bookManager->findAllByIdUser($user->getId());
 
-        $this->render('profile', [
+        $this->render('my_profile', [
             'title' => 'Profil utilisateur',
             'user' => $user,
             'books' => $books
@@ -57,7 +57,7 @@ class UserController extends Controller {
                 ];
 
                 $_SESSION['success'] = "Ravi de vous revoir, " . $user->getUsername() . " !";
-                redirect('/profile');
+                redirect(path: 'my-profile');
             } else {
                 $_SESSION['error'] = "Identifiants invalides.";
                 redirect('/login');

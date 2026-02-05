@@ -20,7 +20,7 @@ switch ($params[0]) {
         $controller->index();
         break;
 
-    case 'profile':
+    case 'my-profile':
         require_once '../app/Controllers/UserController.php';
         $controller = new UserController();
         $controller->profile();

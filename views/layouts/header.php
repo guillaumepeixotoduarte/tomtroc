@@ -38,7 +38,7 @@
                                     <a class="nav-link <?= navBarIsActive('messages') ?>" href="<?= url('messages') ?>"><i class="bi bi-chat"></i> Messagerie</a>
                                 </li>
                                 <li class="nav-item mx-3">
-                                    <a class="nav-link <?= navBarIsActive('profile') ?>" href="<?= url('profile') ?>"><i class="bi bi-person-circle"></i> Mon compte</a>
+                                    <a class="nav-link <?= navBarIsActive('my-profile') ?>" href="<?= url('my-profile') ?>"><i class="bi bi-person-circle"></i> Mon compte</a>
                                 </li>
                                 <li class="nav-item mx-3">
                                     <a class="nav-link" href="<?= url('logout') ?>">Déconnexion</a>

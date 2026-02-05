@@ -1,6 +1,6 @@
 <div class="container-fluid p-5 pt-4 m-0 h-100 second-bg-color">
     <div class="max-width-1000 mx-auto">
-        <a class="grey-text text-decoration-none" href="<?= url('profile') ?>"> <i class="bi bi-arrow-left"></i> retour </a>
+        <a class="grey-text text-decoration-none" href="<?= url('my-profile') ?>"> <i class="bi bi-arrow-left"></i> retour </a>
         <h3 class="my-3"><?= $title ?></h3>
         <form class="p-4 bg-white rounded-4 mt-3 row" method="post" action="<?= url('book/save-book') ?>" enctype="multipart/form-data">
             <div class="col-12 col-lg-6 mb-3">
