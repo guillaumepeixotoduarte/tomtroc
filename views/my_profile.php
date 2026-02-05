@@ -6,12 +6,12 @@
                 <div class="d-flex justify-content-center align-items-center flex-column p-3 bg-white rounded-4 h-100">
                     <div class="d-flex flex-column align-items-center justify-content-center my-4">
                         <img src="<?= !empty($user->getProfilImage()) ? $user->getProfilImage() : 'img/default-profil-image.png' ?>" alt="Icône utilisateur" class="mb-1" style="width: 100px;">
-                        <a class="grey-text" href="#">Modifier l'image</a>
+                        <a class="grey-text font-size-12" href="#">Modifier l'image</a>
                     </div>
                     <hr class="w-50 grey-text">
                     <div class="text-center  my-4">
                         <h5><?= $user->getUsername() ?></h5>
-                        <p class="grey-text"> Membre depuis <?= $user->getAccoundAge() ?> </p>
+                        <p class="grey-text font-size-12"> Membre depuis <?= $user->getAccoundAge() ?> </p>
                         <p class="font-size-8 fw-semibold mb-1">BIBLIOTHEQUE</p>
                         <p class="mt-0 font-size-14"><i class="bi bi-book"></i> <?= count($books) ?> livre<?= count($books) > 1 ? 's' : '' ?></p>
                     </div>
@@ -40,8 +40,12 @@
             </div>
         </div>
 
+        <div class="col-12 d-flex justify-content-between align-items-center mt-3">
+            <h5 class="my-2">Ma bibliothèque</h5>
+            <a href="<?= url('/book/edit') ?>" class="my-auto text-black">Ajouter un livre</a>
+        </div>
         <?php if (!empty($books)): ?>
-            <div class="mt-5 bg-white rounded-4">
+            <div class="bg-white rounded-4">
                 <div class="profil-book-list col-12 pt-4 mb-1 row flex-row font-size-8 fw-semibold">
                     <div class="col-2">PHOTO</div>
                     <div class="col-2">TITRE</div>
@@ -50,7 +54,7 @@
                     <div class="col-2">DISPONIBILITE</div>
                     <div class="col-2">ACTION</div>
                 </div>
-                <hr class="col-12 my-1 grey-text">
+                <hr class="col-12 my-1">
                 <?php foreach($books as $book): ?>
                     <div class="profil-book-list col-12 py-4 row flex-row">
                         <div class="col-2 d-flex align-items-center"><img src="<?= getBookImageUrl($book->getImage()) ?>" class="img-fluid table-image-column" alt="Image du livre : <?= $book->getTitle() ?>"></div>
