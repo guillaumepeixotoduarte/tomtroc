@@ -1,5 +1,5 @@
 <section class="main-bg-color">
-    <div class="container-fluid px-0 mx-auto px-md-2 pt-0 pt-sm-5 pb-5 d-flex align-items-center " style="max-width: 1000px;">
+    <div class="container-fluid px-0 mx-auto px-md-2 pt-0 pt-sm-5 pb-5 d-flex align-items-center max-width-1000" >
         <div class="row w-100 m-0 flex-wrap-reverse"> 
             <div class="section-text-content col-12 col-lg-6 px-4 px-sm-0 my-5 my-lg-auto">
                 <h1>Rejoignez nos lecteurs passionnés</h1>
