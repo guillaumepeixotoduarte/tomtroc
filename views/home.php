@@ -10,7 +10,7 @@
             <div class="col-12 col-lg-6 d-flex flex-column align-items-center align-items-lg-end p-0">
                 <div class="image-wrapper">
                     <img src="img/home_image.png" alt="Echange de livres" class="img-fluid"> 
-                    <p class="grey-text fst-italic text-end w-100 my-2 mx-0 pe-2 pe-sm-0">Hamza</p>
+                    <p class="grey-text font-size-12 fst-italic text-end w-100 my-2 mx-0 pe-2 pe-sm-0">Hamza</p>
                 </div>
             </div>
             
@@ -20,8 +20,26 @@
 
 <section class="second-bg-color text-center ">
     <div class="max-width-1000 w-80 mx-auto px-4 px-lg-0 py-5">
-        <h2> Les derniers livres ajoutés </h2>
-        <div id="latest-books" class="">
+        <h2 class="my-5"> Les derniers livres ajoutés </h2>
+        <div id="latest-books" class="py-5 row row-cols-2 row-cols-md-4 g-4">
+            <?php if(!empty($latestBooks)): ?>
+                <?php foreach($latestBooks as $book): ?>
+
+                    <div class="col">
+                        <div class="card border-0 rounded-bottom">
+                            <img src="<?= getBookImageUrl($book->getImage()) ?>" alt="<?= $book->getTitle() ?>" class="w-100">
+                            <div class="card-body text-start">
+                                <p class="font-size-14 mb-2"><?= $book->getTitle() ?></p>
+                                <p class="card-text grey-text font-size-12"><?= $book->getAuthor() ?></p>
+                                <p class="grey-text fst-italic font-size-12">Vendu par : <?= $book->getOwner()->getUsername() ?></p>
+                            </div>
+                        </div>
+                    </div>
+
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p class="text-center">Aucun livre disponible pour le moment.</p>
+            <?php endif; ?>
             <!-- Les livres seront chargés ici dynamiquement -->
         </div>
         <button class="classic-button green-button mt-3 w-100 w-sm-auto">Voir tous les livres</button>
@@ -53,7 +71,7 @@
             <br><br>
             Nous sommes passionnés par la création d'une plateforme conviviale qui permet aux lecteurs de se connecter, de partager leurs découvertes littéraires et d'échanger des livres qui attendent patiemment sur les étagères.
         </p>
-        <p class="grey-text fst-italic">L'équipe Tom Troc</p>
+        <p class="grey-text font-size-12 fst-italic">L'équipe Tom Troc</p>
         <img src="img/heart.png" alt="Heart Icon">
         
     </div>

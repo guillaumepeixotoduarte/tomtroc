@@ -4,9 +4,11 @@ namespace App\Managers;
 
 require_once ROOT . '/app/Core/Database.php';
 require_once ROOT . '/app/Models/Entities/Book.php';
+require_once ROOT . '/app/Models/Entities/User.php';
 
 use App\Core\Database;
 use App\Models\Book;  
+use App\Models\User;  
 
 
 class BookManager {
@@ -29,12 +31,28 @@ class BookManager {
     }
 
     // Récupérer un objet Book précis
-    public function findOne(int $id): ?Book {
-        $stmt = $this->db->prepare("SELECT * FROM books WHERE id = ?");
-        $stmt->execute([$id]);
+    public function findOne(int $id, bool $includeUser = false): ?Book {
+
+        $sql = "SELECT * FROM books WHERE id = :id";
+
+        if ($includeUser) {
+            $sql = "SELECT b.*, u.username FROM books b JOIN users u ON b.user_id = u.id WHERE b.id = :id";
+        }
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(['id' => $id]);
         $row = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-        return $row ? new Book($row) : null;
+        if(!$row) {
+            return null; // Aucun livre trouvé
+        }
+
+        $book = new Book($row);
+        if ($includeUser && isset($row['username'])) {
+            $book->setOwner(new User(['nickname' => $row['username']]));
+        }
+
+        return $book;
     }
 
     public function findAllByIdUser(int $userId): array {
@@ -46,6 +64,58 @@ class BookManager {
         foreach ($rows as $row) {
             $books[] = new Book($row);
         }
+        return $books;
+    }
+
+    /**
+     * Récupère les derniers livres ajoutés
+     * @param int|null $limit Nombre de livres à récupérer
+     * @return array Tableau d'objets Book
+     */
+    public function findDisponibleBooks(int|null $limit = null, bool $includeUser = false): array
+    {
+        $select = "SELECT b.*";
+        $join = "";
+        
+        if ($includeUser) {
+            $select .= ", u.username";
+            $join = " INNER JOIN users u ON b.user_id = u.id";
+        }
+
+        // On ne récupère que les livres dont le statut est "disponible" (souvent 1 en BDD)
+        $sql = "$select FROM books b $join WHERE b.statut_exchange = 1 ORDER BY b.id DESC";
+
+        if ($limit !== null) {
+            $sql .= " LIMIT :limit";
+        }
+        
+        $stmt = $this->db->prepare($sql);
+        // On force le type en INT car PDO a parfois du mal avec LIMIT et les strings
+        if ($limit !== null) {
+            $stmt->bindValue(':limit', $limit, \PDO::PARAM_INT);
+        }
+        $stmt->execute();
+        
+        $data = $stmt->fetchAll();
+        $books = [];
+        
+        foreach ($data as $bookData) {
+            $book = new Book($bookData); // On transforme chaque ligne en objet
+
+            if (isset($bookData['username'])) {
+                $user = new User();
+                $user->setUsername($bookData['username']);
+                if (isset($bookData['user_id'])) {
+                    $user->setId($bookData['user_id']);
+                }
+                
+                // On lie l'objet User à l'objet Book
+                $book->setOwner($user);
+            }
+
+            $books[] = $book; // On ajoute l'objet Book au tableau final
+        }
+        
         return $books;
     }
 

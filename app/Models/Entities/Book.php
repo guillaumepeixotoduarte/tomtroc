@@ -2,8 +2,10 @@
 namespace App\Models;
 
 require_once ROOT . '/app/Core/Entity.php';
+require_once ROOT . '/app/Models/Entities/User.php';
 
 use \App\Core\Entity;
+use \App\Models\User;
 
 class Book extends Entity {
     private string $title;
@@ -12,6 +14,26 @@ class Book extends Entity {
     private ?string $description;
     private ?bool $statutExchange = null;
     private ?int $userId = null;
+
+    private ?User $owner = null; // Propriété pour stocker l'utilisateur lié au livre
+
+     /**
+     * Getter pour l'utilisateur lié au livre.
+     * @return User|null
+     */
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    /**
+     * Setter pour l'utilisateur lié au livre.
+     * @param User|null $owner
+     */
+    public function setOwner(?User $owner): void
+    {
+        $this->owner = $owner;
+    }
 
     /**
      * Setter pour le titre du livre.

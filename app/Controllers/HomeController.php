@@ -5,6 +5,7 @@ require_once ROOT . '/app/Models/Managers/BookManager.php';
 require_once ROOT . '/app/Core/Controller.php';
 
 use App\Core\Controller;
+use App\Managers\BookManager;
 
 class HomeController extends Controller {
     public function index() {
@@ -12,10 +13,14 @@ class HomeController extends Controller {
         $title = "Page d'accueil";
         $username = "Invité"; // Exemple de donnée dynamique
 
+        $bookManager = new BookManager();
+        $latestBooks = $bookManager->findDisponibleBooks(4, true); // Récup
+
         // On charge la vue principale
         $this->render('home', [
             'title' => $title,
-            'username' => $username
+            'username' => $username,
+            'latestBooks' => $latestBooks
         ]);
     }
 }
