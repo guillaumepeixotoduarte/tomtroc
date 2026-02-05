@@ -1,6 +1,6 @@
 <div class="container-fluid p-5 pt-4 m-0 h-100 second-bg-color">
     <div class="max-width-1000 mx-auto">
-        <a class="grey-text text-decoration-none" href="<?= url('my-profile') ?>"> <i class="bi bi-arrow-left"></i> retour </a>
+        <a class="grey-text font-size-12 text-decoration-none" href="<?= url('my-profile') ?>"> <i class="bi bi-arrow-left"></i> retour </a>
         <h3 class="my-3"><?= $title ?></h3>
         <form class="p-4 bg-white rounded-4 mt-3 row" method="post" action="<?= url('book/save-book') ?>" enctype="multipart/form-data">
             <div class="col-12 col-lg-6 mb-3">
@@ -16,20 +16,20 @@
                     <input type="hidden" name="current_cover" value="<?= $book->getImage() ?>">
                 <?php endif; ?>
                 <div class="mb-3">
-                    <label for="title" class="form-label grey-text">Titre</label>
+                    <label for="title" class="form-label grey-text font-size-12">Titre</label>
                     <input type="text" class="form-control light-blue-bg-color" id="title" name="title" value="<?= !empty($book) ? htmlspecialchars($book->getTitle()) : '' ?>" required>
                 </div>
                 <div class="mb-3">
-                    <label for="author" class="form-label grey-text">Auteur</label>
+                    <label for="author" class="form-label grey-text font-size-12">Auteur</label>
                     <input type="text" class="form-control light-blue-bg-color" id="author" name="author" value="<?= !empty($book) ? htmlspecialchars($book->getAuthor()) : '' ?>" required>
                 </div>
                 <div class="mb-3">
-                    <label for="description" class="form-label grey-text">Description</label>
+                    <label for="description" class="form-label grey-text font-size-12">Description</label>
                     <textarea class="form-control light-blue-bg-color" id="description" name="description" rows="4" required><?= !empty($book) ? htmlspecialchars($book->getDescription()) : '' ?></textarea>
                 </div>
 
                 <div class="mb-3">
-                    <label for="disponibilite" class="form-label grey-text">Disponibilité</label>
+                    <label for="disponibilite" class="form-label grey-text font-size-12">Disponibilité</label>
                     <select class="form-select font-size-14 light-blue-bg-color" id="disponibilite" name="availability" required>
                         <option value="1" <?= !empty($book) && $book->getStatutExchange() ? 'selected' : '' ?>>Disponible</option>
                         <option value="0" <?= !empty($book) && !$book->getStatutExchange() ? 'selected' : '' ?>>Indisponible</option>
