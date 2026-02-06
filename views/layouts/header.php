@@ -13,43 +13,43 @@
         <header class="main-header">
             <nav class="navbar navbar-expand-lg navbar-light main-bg-color">
                 <div class="container-fluid">
-                    <a class="navbar-brand ms-5 ps-5" href="<?= url('') ?>">
+                    <a class="navbar-brand ms-2 ms-lg-3 ms-xl-5 ps-1 ps-lg-3 ps-xl-5" href="<?= url('') ?>">
                         <img src="<?= url('img/logo.png') ?>" id="logo-nav" alt="Logo" class="">
                     </a>
 
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav me-auto">
-                            <li class="nav-item mx-3">
+                            <li class="nav-item mx-3 d-flex align-items-center">
                                 <a class="nav-link <?= navBarIsActive('home') ?>" href="<?= url('home') ?>">Accueil</a>
                             </li>
-                            <li class="nav-item mx-3">
+                            <li class="nav-item mx-3 d-flex align-items-center">
                                 <a class="nav-link <?= navBarIsActive('nos-livres') ?>" href="<?= url('nos-livres') ?>">Nos livres à l'échange</a>
                             </li>
 
                         </ul>
 
                         <?php if(!empty($_SESSION['user'])): ?>
-                            <ul class="navbar-nav me-5 pe-5">
-                                <li class="nav-item mx-3">
+                            <ul class="navbar-nav me-0 me-xl-5 pe-1 pe-lg-3 pe-xl-5">
+                                <li class="nav-item mx-3 d-flex align-items-center">
                                     <a class="nav-link <?= navBarIsActive('messages') ?>" href="<?= url('messages') ?>"><i class="bi bi-chat"></i> Messagerie</a>
                                 </li>
-                                <li class="nav-item mx-3">
+                                <li class="nav-item mx-3 d-flex align-items-center">
                                     <a class="nav-link <?= navBarIsActive('my-profile') ?>" href="<?= url('my-profile') ?>"><i class="bi bi-person-circle"></i> Mon compte</a>
                                 </li>
-                                <li class="nav-item mx-3">
+                                <li class="nav-item mx-3 d-flex align-items-center">
                                     <a class="nav-link" href="<?= url('logout') ?>">Déconnexion</a>
                                 </li>
                             </ul>
                         <?php else: ?>
-                            <ul class="navbar-nav me-5 pe-5">
-                                <li class="nav-item mx-3">
-                                    <a class="nav-link <?= navBarIsActive('inscription') ?>" href="<?= url('inscription') ?>">Inscription</a>
+                            <ul class="navbar-nav me-0 me-xl-5 pe-1 pe-lg-3 pe-xl-5">
+                                <li class="nav-item mx-3 d-flex align-items-center">
+                                    <a class="nav-link <?= navBarIsActive('register') ?>" href="<?= url('register') ?>">Inscription</a>
                                 </li>
-                                <li class="nav-item mx-3">
+                                <li class="nav-item mx-3 d-flex align-items-center">
                                     <a class="nav-link <?= navBarIsActive('login') ?>" href="<?= url('login') ?>">Connexion</a>
                                 </li>
                             </ul>
