@@ -1,4 +1,4 @@
-<div class="container-fluid p-5 m-0 h-100 second-bg-color">
+<div class="container-fluid p-md-5 p-4 m-0 h-100 second-bg-color">
     <div class="max-width-1000 mx-auto">
         <h2 class="py-4 px-0">Mon compte</h2>
         <div class="row">
@@ -40,12 +40,12 @@
             </div>
         </div>
 
-        <div class="col-12 d-flex justify-content-between align-items-center mt-3">
-            <h5 class="my-2">Ma bibliothèque</h5>
+        <div class="col-12 d-flex justify-content-between align-items-center mt-5 mt-lg-2 mb-2">
+            <h5 class="my-auto">Ma bibliothèque</h5>
             <a href="<?= url('/book/edit') ?>" class="my-auto text-black">Ajouter un livre</a>
         </div>
         <?php if (!empty($books)): ?>
-            <div class="bg-white rounded-4">
+            <div class="bg-white rounded-4 d-none d-md-block">
                 <div class="profil-book-list col-12 pt-4 mb-1 row flex-row font-size-8 fw-semibold">
                     <div class="col-2">PHOTO</div>
                     <div class="col-2">TITRE</div>
@@ -63,6 +63,28 @@
                         <div class="col-2 d-flex align-items-center"><?= htmlspecialchars( truncate($book->getDescription())) ?></div>
                         <div class="col-2 d-flex align-items-center"><span class="<?= $book->getStatutExchange() ? 'disponible-badge' : 'indisponible-badge' ?>"><?= $book->getStatutExchange() ? 'Disponible' : 'Indisponible' ?></span></div>
                         <div class="col-2 d-flex justify-content-between align-items-center flex-wrap">
+                            <a href="<?= url('book/edit/'.$book->getId()) ?>" class="text-black text-decoration-underline">Éditer</a>
+                            <a href="<?= url('/profile/delete-book/' . $book->getId()) ?>" class="text-danger text-decoration-underline" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">Supprimer </a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <div class="d-block d-md-none">
+                <?php foreach($books as $book): ?>
+                    <div class="col-12 p-3 bg-white rounded-4 mb-3">
+                        <div class="row">
+                            <div class="col-4 d-flex justify-content-center align-items-center">
+                                <img src="<?= getBookImageUrl($book->getImage()) ?>" class="img-fluid table-image-column w-100" alt="Image du livre : <?= $book->getTitle() ?>">
+                            </div>
+                            <div class="col-8 d-flex flex-column">
+                                    <p class="font-size-14 mb-1"><?= htmlspecialchars($book->getTitle()) ?></p>
+                                    <p class="font-size-14 mb-2"><?= htmlspecialchars($book->getAuthor()) ?></p>
+                                    <div><span class="<?= $book->getStatutExchange() ? 'disponible-badge' : 'indisponible-badge' ?>"><?= $book->getStatutExchange() ? 'Disponible' : 'Indisponible' ?></span></div>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-2 font-size-14 fst-italic"><?= htmlspecialchars( truncate($book->getDescription())) ?></div>
+                       
+                        <div class="col-12 my-4 d-flex justify-content-around align-items-center flex-row">
                             <a href="<?= url('book/edit/'.$book->getId()) ?>" class="text-black text-decoration-underline">Éditer</a>
                             <a href="<?= url('/profile/delete-book/' . $book->getId()) ?>" class="text-danger text-decoration-underline" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">Supprimer </a>
                         </div>

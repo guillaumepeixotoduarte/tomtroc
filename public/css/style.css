@@ -234,3 +234,9 @@ h1{
 .profil-book-list{
     padding: 0 50px;
 }
+
+@media (min-width:768px) and (max-width: 992px) {
+    .profil-book-list{
+        padding: 0 20px;
+    }
+}
