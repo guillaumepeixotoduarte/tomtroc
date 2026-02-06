@@ -21,20 +21,20 @@
 <section class="second-bg-color text-center ">
     <div class="max-width-1000 w-80 mx-auto px-4 px-lg-0 py-5">
         <h2 class="my-5"> Les derniers livres ajoutés </h2>
-        <div id="latest-books" class="py-5 row row-cols-2 row-cols-md-4 g-4">
+        <div class="py-5 row row-cols-2 row-cols-md-4 g-4">
             <?php if(!empty($latestBooks)): ?>
                 <?php foreach($latestBooks as $book): ?>
 
-                    <div class="col">
+                    <a href="<?= url('book/detail/' . $book->getId()) ?>" class="col">
                         <div class="card border-0 rounded-bottom">
                             <img src="<?= getBookImageUrl($book->getImage()) ?>" alt="<?= $book->getTitle() ?>" class="w-100">
                             <div class="card-body text-start">
                                 <p class="font-size-14 mb-2"><?= $book->getTitle() ?></p>
                                 <p class="card-text grey-text font-size-12"><?= $book->getAuthor() ?></p>
-                                <p class="grey-text fst-italic font-size-12">Vendu par : <?= $book->getOwner()->getUsername() ?></p>
+                                <p class="grey-text fst-italic font-size-12 mb-1">Vendu par : <?= $book->getOwner()->getUsername() ?></p>
                             </div>
                         </div>
-                    </div>
+                    </a>
 
                 <?php endforeach; ?>
             <?php else: ?>
