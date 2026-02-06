@@ -60,7 +60,7 @@ class BookController extends Controller {
 
         // On envoie le livre à la vue (il sera null si c'est un ajout)
         $this->render('form_book', [
-            'title' => $id ? 'Modifier le livre' : 'Ajouter un livre',
+            'title' => $id ? 'Modifier les informations' : 'Ajouter un livre',
             'book'  => $book
         ]);
     }

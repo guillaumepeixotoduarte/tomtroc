@@ -14,7 +14,7 @@ class HomeController extends Controller {
         $username = "Invité"; // Exemple de donnée dynamique
 
         $bookManager = new BookManager();
-        $latestBooks = $bookManager->findDisponibleBooks(4, true); // Récup
+        $latestBooks = $bookManager->findAll(4, true); // Récup
 
         // On charge la vue principale
         $this->render('home', [

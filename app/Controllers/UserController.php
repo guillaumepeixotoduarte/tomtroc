@@ -23,7 +23,7 @@ class UserController extends Controller {
         ]);
     }
 
-    public function profile() {
+    public function myProfilePage() {
 
         $userManager = new UserManager();
         $bookManager = new BookManager();
@@ -32,6 +32,28 @@ class UserController extends Controller {
 
         $this->render('my_profile', [
             'title' => 'Profil utilisateur',
+            'user' => $user,
+            'books' => $books
+        ]);
+    }
+
+    /** Affiche le profil d'un utilisateur spécifique (accessible via /profile/{id})
+     * @param int|null $id L'ID de l'utilisateur à afficher
+     */
+    public function profilePage(int $id): void {
+
+        $userManager = new UserManager();
+        $bookManager = new BookManager();
+        $user = $userManager->findById($id);
+
+        if(!$user) {
+            redirect('home');
+        }
+
+        $books = $bookManager->findAllByIdUser($user->getId());
+
+        $this->render('profile', [
+            'title' => 'Profil de ' . $user->getUsername(),
             'user' => $user,
             'books' => $books
         ]);

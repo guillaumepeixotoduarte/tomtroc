@@ -12,10 +12,10 @@
                     <p class="text-uppercase font-size-8 fw-semibold mb-2">Description</p>
                     <p class="font-size-14 mb-4"><?= $book->getDescription() ?></p>
                     <p class="text-uppercase  font-size-8 fw-semibold mb-2">propriétaire</p>
-                    <div class="profile-badge mb-5">
+                    <a href="<?= url('profile/'.$book->getUserId() ) ?>" class="profile-badge mb-5 text-decoration-none text-black">
                         <img src="<?= !empty($book->getOwner()->getProfilImage()) ? $book->getOwner()->getProfilImage() : url('img/default-profil-image.png') ?>" alt="Image de profil de <?= $book->getOwner()->getUsername() ?>" class="profile-image">
                         <span class="profile-username"><?= $book->getOwner()->getUsername() ?></span>
-                    </div>
+                    </a>
 
                     <?php if (isset($_SESSION['user']) && $_SESSION['user']['id'] !== $book->getUserId()): ?>
                         <a href="<?= url('/message/send/' . $book->getUserId()) ?>" class="classic-button green-button text-decoration-none w-100 d-block mt-5 text-center">

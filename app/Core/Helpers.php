@@ -63,6 +63,7 @@
             'home' => ['index'],
             'nos-livres' => ['index'],
             'book' => ['detail'], // book/detail/{id}
+            'profile' => ['index'], // profile/{id}
             'login' => ['index'],
             'login-user' => ['index'],
             'register' => ['index'],
@@ -84,6 +85,13 @@
      */
     function getBookImageUrl($imagePath) {
         return url('uploads/book_cover/' . $imagePath);
+    }
+
+    /**
+    * Renvoie l'URL vers l'image de profil d'un utilisateur
+    */
+    function getProfileImageUrl($imagePath) {
+        return url('uploads/profile_images/' . $imagePath);
     }
 
     /**

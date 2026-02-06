@@ -235,6 +235,15 @@ h1{
     padding: 0 50px;
 }
 
+.table-books-list-bg > div:nth-child(even) {
+    background-color: var(--light-blue-color); /* Une couleur grise très légère */
+}
+
+.table-books-list-bg > div:last-child {
+    border-bottom-left-radius: var(--bs-border-radius-xl);
+    border-bottom-right-radius: var(--bs-border-radius-xl);
+}
+
 @media (min-width:768px) and (max-width: 992px) {
     .profil-book-list{
         padding: 0 20px;

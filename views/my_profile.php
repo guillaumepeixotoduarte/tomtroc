@@ -55,19 +55,21 @@
                     <div class="col-2">ACTION</div>
                 </div>
                 <hr class="col-12 my-1">
-                <?php foreach($books as $book): ?>
-                    <div class="profil-book-list col-12 py-4 row flex-row">
-                        <div class="col-2 d-flex align-items-center"><img src="<?= getBookImageUrl($book->getImage()) ?>" class="img-fluid table-image-column" alt="Image du livre : <?= $book->getTitle() ?>"></div>
-                        <div class="col-2 d-flex align-items-center"><?= htmlspecialchars($book->getTitle()) ?></div>
-                        <div class="col-2 d-flex align-items-center"><?= htmlspecialchars($book->getAuthor()) ?></div>
-                        <div class="col-2 d-flex align-items-center"><?= htmlspecialchars( truncate($book->getDescription())) ?></div>
-                        <div class="col-2 d-flex align-items-center"><span class="<?= $book->getStatutExchange() ? 'disponible-badge' : 'indisponible-badge' ?>"><?= $book->getStatutExchange() ? 'Disponible' : 'Indisponible' ?></span></div>
-                        <div class="col-2 d-flex justify-content-between align-items-center flex-wrap">
-                            <a href="<?= url('book/edit/'.$book->getId()) ?>" class="text-black text-decoration-underline">Éditer</a>
-                            <a href="<?= url('/profile/delete-book/' . $book->getId()) ?>" class="text-danger text-decoration-underline" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">Supprimer </a>
+                <div class="table-books-list-bg">
+                    <?php foreach($books as $book): ?>
+                        <div class="profil-book-list col-12 py-4 row mx-0 flex-row">
+                            <div class="col-2 ps-0 d-flex align-items-center"><img src="<?= getBookImageUrl($book->getImage()) ?>" class="img-fluid table-image-column" alt="Image du livre : <?= $book->getTitle() ?>"></div>
+                            <div class="col-2 ps-0 d-flex align-items-center"><?= htmlspecialchars($book->getTitle()) ?></div>
+                            <div class="col-2 ps-0 d-flex align-items-center"><?= htmlspecialchars($book->getAuthor()) ?></div>
+                            <div class="col-2 ps-0 d-flex align-items-center"><?= htmlspecialchars( truncate($book->getDescription())) ?></div>
+                            <div class="col-2 ps-0 d-flex align-items-center"><span class="<?= $book->getStatutExchange() ? 'disponible-badge' : 'indisponible-badge' ?>"><?= $book->getStatutExchange() ? 'Disponible' : 'Indisponible' ?></span></div>
+                            <div class="col-2 ps-0 d-flex justify-content-between align-items-center flex-wrap">
+                                <a href="<?= url('book/edit/'.$book->getId()) ?>" class="text-black text-decoration-underline">Éditer</a>
+                                <a href="<?= url('/profile/delete-book/' . $book->getId()) ?>" class="text-danger text-decoration-underline" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">Supprimer </a>
+                            </div>
                         </div>
-                    </div>
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
+                </div>
             </div>
             <div class="d-block d-md-none">
                 <?php foreach($books as $book): ?>

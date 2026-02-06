@@ -29,7 +29,14 @@ switch ($params[0]) {
     case 'my-profile':
         require_once '../app/Controllers/UserController.php';
         $controller = new UserController();
-        $controller->profile();
+        $controller->myProfilePage();
+        break;
+
+    case 'profile':
+        require_once '../app/Controllers/UserController.php';
+        $id = (isset($params[1]) && is_numeric($params[1])) ? $params[1] : null; 
+        $controller = new UserController();
+        $controller->profilePage($id);
         break;
 
     case 'login':
