@@ -75,7 +75,7 @@ class UserController extends Controller {
             // 2. Validation simple
             if (empty($username) || empty($email) || empty($password) || strlen($password) < 8) {
                 $_SESSION['error'] = "Veuillez remplir les champs correctement (password: 8 caractères min).";
-                redirect('/inscription');
+                redirect('register');
             }
 
             $userManager = new UserManager();
@@ -87,7 +87,7 @@ class UserController extends Controller {
                 } else {
                     $_SESSION['error'] = "Ce pseudo est déjà pris.";
                 }
-                redirect('/inscription');
+                redirect('register');
             }
 
             // 3. Appel au Modèle
@@ -99,7 +99,7 @@ class UserController extends Controller {
                 redirect('/login');
             } else {
                 $_SESSION['error'] = "Erreur lors de l'inscription.";
-                redirect('/inscription');
+                redirect('register');
             }
         }
     }

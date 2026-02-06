@@ -27,7 +27,7 @@
                         <input type="submit" class="classic-button green-button w-100 mb-4" value="Se connecter">
 
                         <p class="font-size-14 text-black">
-                            Pas de compte ? <a class="text-black" href="<?= url('inscription') ?>">Inscrivez-vous</a>
+                            Pas de compte ? <a class="text-black" href="<?= url('register') ?>">Inscrivez-vous</a>
                         </p>
                     </form>
                 </div>
