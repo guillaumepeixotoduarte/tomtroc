@@ -62,10 +62,10 @@
         $public_routes = [
             'home' => ['index'],
             'nos-livres' => ['index'],
-            'book' => ['details'], // book/details/{id}
+            'book' => ['detail'], // book/detail/{id}
             'login' => ['index'],
             'login-user' => ['index'],
-            'inscription' => ['index'],
+            'register' => ['index'],
             'inscription-save' => ['index']
         ];
 

@@ -19,7 +19,28 @@ class BookController extends Controller {
     // Page : Détails d'un livre spécifique
     public function show($id) {
 
-        require_once ROOT . '/views/books/detail.php';
+        $bookManager = new BookManager();
+        $book = $bookManager->findOne((int)$id, true); // Récupère le livre avec les infos utilisateur
+
+        if (!$book) {
+            $_SESSION['error'] = "Livre introuvable.";
+            redirect('nos-livres');
+        }
+
+        $this->render('book_details', [
+            'title' => 'Détails du livre',
+            'book' => $book
+        ]);
+    }
+
+    public function ourBooks() {
+        $bookManager = new BookManager();
+        $books = $bookManager->findAll(null, true); // Récupère tous les livres disponibles avec les infos utilisateur
+
+        $this->render('our_books', [
+            'title' => 'Nos livres disponibles',
+            'books' => $books
+        ]);
     }
 
     public function edit($id = null) {

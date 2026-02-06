@@ -1,0 +1,56 @@
+<div class="container-fluid m-0 h-100 second-bg-color">
+    <div class="row">
+        <div class="col-12 col-md-6 px-0">
+            <img src="<?= getBookImageUrl($book->getImage()) ?>" class="img-fluid w-100" alt="<?= $book->getTitle() ?>">
+        </div>
+        <div class="col-12 col-md-6 px-4 px-lg-0">
+            <div class="w-100">
+                <div class="mx-0 mt-5 mx-lg-5 p-0 p-lg-3 pe-lg-5">
+                    <h2 class="mb-3"><?= $book->getTitle() ?></h2>
+                    <p class="font-size-16 grey-text">par <?= $book->getAuthor() ?></p>
+                    <hr class="short-line my-4">
+                    <p class="text-uppercase font-size-8 fw-semibold mb-2">Description</p>
+                    <p class="font-size-14 mb-4"><?= $book->getDescription() ?></p>
+                    <p class="text-uppercase  font-size-8 fw-semibold mb-2">propriétaire</p>
+                    <div class="profile-badge mb-5">
+                        <img src="<?= !empty($book->getOwner()->getProfilImage()) ? $book->getOwner()->getProfilImage() : url('img/default-profil-image.png') ?>" alt="Image de profil de <?= $book->getOwner()->getUsername() ?>" class="profile-image">
+                        <span class="profile-username"><?= $book->getOwner()->getUsername() ?></span>
+                    </div>
+
+                    <?php if (isset($_SESSION['user']) && $_SESSION['user']['id'] !== $book->getUserId()): ?>
+                        <a href="<?= url('/message/send/' . $book->getUserId()) ?>" class="classic-button green-button text-decoration-none w-100 d-block mt-5 text-center">
+                            Envoyer un message
+                        </a>
+                    <?php elseif(!isset($_SESSION['user'])): ?>
+                        <button type="button" class="classic-button green-button text-decoration-none w-100 mt-5" data-bs-toggle="modal" data-bs-target="#loginModal">
+                            Envoyer un message
+                        </button>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-4" id="exampleModalFullscreenXxlLabel">Envie de lire ce livre ?</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Vous devez être connecté pour envoyer un message à <strong><?= htmlspecialchars($book->getOwner()->getUsername()) ?></strong></p>
+                    <div class="d-grid gap-2">
+                        <a href="<?= url('login') ?>" class="classic-button green-button text-center text-decoration-none">Se connecter</a>
+                        <a href="<?= url('register') ?>" class="classic-button secondary-green-button text-center text-decoration-none">Créer un compte</a>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -20,6 +20,12 @@ switch ($params[0]) {
         $controller->index();
         break;
 
+    case 'nos-livres':
+        require_once '../app/Controllers/BookController.php';
+        $controller = new BookController();
+        $controller->ourBooks();
+        break;
+
     case 'my-profile':
         require_once '../app/Controllers/UserController.php';
         $controller = new UserController();
@@ -43,7 +49,7 @@ switch ($params[0]) {
         redirect('home');
         break;
 
-    case 'inscription':
+    case 'register':
         require_once '../app/Controllers/UserController.php';
         $controller = new UserController();
         $controller->register();
@@ -69,6 +75,13 @@ switch ($params[0]) {
         elseif ($action === 'save-book'){
             $controller->saveBook();
             break;
+        }
+        elseif ($action === 'detail') {
+            $id = (isset($params[2]) && is_numeric($params[2])) ? $params[2] : null; 
+            if(!$id) {
+                redirect('nos-livres');
+            }
+            $controller->show($id);
         }
         elseif ($action === 'delete') {
             // $id = $params[2] ?? null;

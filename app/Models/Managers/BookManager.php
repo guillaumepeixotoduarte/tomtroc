@@ -18,17 +18,6 @@ class BookManager {
         $this->db = Database::getConnection();
     }
 
-    // Récupérer tous les livres sous forme d'objets Book
-    public function findAll(): array {
-        $stmt = $this->db->query("SELECT * FROM books");
-        $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-        
-        $books = [];
-        foreach ($rows as $row) {
-            $books[] = new Book($row);
-        }
-        return $books;
-    }
 
     // Récupérer un objet Book précis
     public function findOne(int $id, bool $includeUser = false): ?Book {
@@ -36,7 +25,7 @@ class BookManager {
         $sql = "SELECT * FROM books WHERE id = :id";
 
         if ($includeUser) {
-            $sql = "SELECT b.*, u.username FROM books b JOIN users u ON b.user_id = u.id WHERE b.id = :id";
+            $sql = "SELECT b.*, u.username, u.profil_image FROM books b JOIN users u ON b.user_id = u.id WHERE b.id = :id";
         }
 
         $stmt = $this->db->prepare($sql);
@@ -49,7 +38,7 @@ class BookManager {
 
         $book = new Book($row);
         if ($includeUser && isset($row['username'])) {
-            $book->setOwner(new User(['nickname' => $row['username']]));
+            $book->setOwner(new User(['username' => $row['username'], 'profil_image' => $row['profil_image'] ?? null]));
         }
 
         return $book;
@@ -72,18 +61,18 @@ class BookManager {
      * @param int|null $limit Nombre de livres à récupérer
      * @return array Tableau d'objets Book
      */
-    public function findDisponibleBooks(int|null $limit = null, bool $includeUser = false): array
+    public function findAll(int|null $limit = null, bool $includeUser = false): array
     {
         $select = "SELECT b.*";
         $join = "";
         
         if ($includeUser) {
-            $select .= ", u.username";
+            $select .= ", u.username, u.profil_image";
             $join = " INNER JOIN users u ON b.user_id = u.id";
         }
 
         // On ne récupère que les livres dont le statut est "disponible" (souvent 1 en BDD)
-        $sql = "$select FROM books b $join WHERE b.statut_exchange = 1 ORDER BY b.id DESC";
+        $sql = "$select FROM books b $join ORDER BY b.id DESC";
 
         if ($limit !== null) {
             $sql .= " LIMIT :limit";
@@ -105,6 +94,7 @@ class BookManager {
             if (isset($bookData['username'])) {
                 $user = new User();
                 $user->setUsername($bookData['username']);
+                $user->setProfilImage($bookData['profil_image'] ?? null);
                 if (isset($bookData['user_id'])) {
                     $user->setId($bookData['user_id']);
                 }

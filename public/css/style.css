@@ -30,6 +30,10 @@ h1{
 
 /* -------- Classe global ------- */
 
+.font-size-16{
+    font-size: 16px;
+}
+
 .font-size-14{
     font-size: 14px;
 }
@@ -169,6 +173,41 @@ h1{
         width: 50%;
     }
 }
+
+/* ------- Nos livres -------- */
+
+#searchInput::placeholder {
+    color: var(--grey-text-color) !important;
+}
+
+#searchInput{
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+/* ----------- Detail livre ---------- */
+
+.short-line{
+    width: 27px;
+}
+
+.profile-badge {
+    display: inline-flex;
+    align-items: center;
+    height: 60px;
+    padding: 5px;
+    padding-right: 15px;
+    border: none;
+    border-radius: 30px;
+    background-color: white;
+}
+
+.profile-badge img {
+    height: 100%;
+    margin-right: 5px;
+}
+
 
 /* ------- Profil ------- */
 
