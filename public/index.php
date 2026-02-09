@@ -32,6 +32,18 @@ switch ($params[0]) {
         $controller->myProfilePage();
         break;
 
+    case 'my-profile-update':
+        require_once '../app/Controllers/UserController.php';
+        $controller = new UserController();
+        $controller->updateProfile();
+        break;
+    
+    case 'update-profile-image':
+        require_once '../app/Controllers/UserController.php';
+        $controller = new UserController();
+        $controller->updateProfileImage();
+        break;
+
     case 'profile':
         require_once '../app/Controllers/UserController.php';
         $id = (isset($params[1]) && is_numeric($params[1])) ? $params[1] : null; 
@@ -91,18 +103,9 @@ switch ($params[0]) {
             $controller->show($id);
         }
         elseif ($action === 'delete') {
-            // $id = $params[2] ?? null;
-            // $controller->delete($id);
-            echo "Suppression du livre (à implémenter)";
+            $id = $params[2] ?? null;
+            $controller->deleteBook($id);
         }
-        break;
-    
-    case 'nos-livres':
-        echo "Page nos livres (à créer)";
-        break;
-
-    case 'contact':
-        echo "Page contact (à créer)";
         break;
 
     default:

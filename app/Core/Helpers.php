@@ -91,7 +91,7 @@
     * Renvoie l'URL vers l'image de profil d'un utilisateur
     */
     function getProfileImageUrl($imagePath) {
-        return url('uploads/profile_images/' . $imagePath);
+        return url('uploads/profile_image/' . $imagePath);
     }
 
     /**

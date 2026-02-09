@@ -1,4 +1,5 @@
 const coverInput = document.getElementById('cover-image');
+const profilImageInput = document.getElementById('profileImageInput');
 
 if(coverInput) {
     coverInput.addEventListener('change', function(event) {
@@ -14,6 +15,18 @@ if(coverInput) {
             }
 
             reader.readAsDataURL(file); // On lance la lecture du fichier
+        }
+    });
+}
+
+if(profilImageInput) {
+    profilImageInput.addEventListener('change', function() {
+        const file = this.files[0];
+        
+        if (file) {
+            setTimeout(() => {
+                document.getElementById('profileImageForm').submit();
+            }, 100);
         }
     });
 }

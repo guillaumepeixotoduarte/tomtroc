@@ -13,7 +13,7 @@
                     <p class="font-size-14 mb-4"><?= $book->getDescription() ?></p>
                     <p class="text-uppercase  font-size-8 fw-semibold mb-2">propriétaire</p>
                     <a href="<?= url('profile/'.$book->getUserId() ) ?>" class="profile-badge mb-5 text-decoration-none text-black">
-                        <img src="<?= !empty($book->getOwner()->getProfilImage()) ? $book->getOwner()->getProfilImage() : url('img/default-profil-image.png') ?>" alt="Image de profil de <?= $book->getOwner()->getUsername() ?>" class="profile-image">
+                        <img src="<?= !empty($book->getOwner()->getProfilImage()) ? getProfileImageUrl($book->getOwner()->getProfilImage()) : url('img/default-profil-image.png') ?>" alt="Image de profil de <?= $book->getOwner()->getUsername() ?>" class="rounded-circle">
                         <span class="profile-username"><?= $book->getOwner()->getUsername() ?></span>
                     </a>
 

@@ -26,13 +26,47 @@ class UserManager {
         ]);
     }
 
-    public function findByEmailOrUsername($email, $username) {
-        $sql = "SELECT * FROM users WHERE email = :email OR username = :username";
+    public function updateProfile($id, $username, $email, $password) {
+
+        $params = [
+            'id' => $id,
+            'username' => $username,
+            'email'    => $email,
+            'password' => password_hash($password, PASSWORD_BCRYPT)
+        ];
+
+        $sql = "UPDATE users SET username = :username, email = :email, password = :password WHERE id = :id";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([
+        
+        return $stmt->execute($params);
+    }
+
+    public function updateProfileImage($id, $profilImageName) {
+        $sql = "UPDATE users SET profil_image = :profil_image WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        
+        return $stmt->execute([
+            'id' => $id,
+            'profil_image' => $profilImageName
+        ]);
+    }
+
+    public function findByEmailOrUsername($email, $username, $includeCurrentUser = false) {
+
+        $params = [
             'email'    => $email,
             'username' => $username
-        ]);
+        ];
+        $whereNotCurrentUser = '';
+
+        if($includeCurrentUser){
+            $params['id'] = (!empty($_SESSION['user']['id']) && is_numeric($_SESSION['user']['id']) ? $_SESSION['user']['id'] : 0);
+            $whereNotCurrentUser = "AND id != :id ";
+        }
+
+        $sql = "SELECT * FROM users WHERE ( email = :email OR username = :username ) $whereNotCurrentUser";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute($params);
         
         // fetch() renvoie l'utilisateur s'il existe, ou false sinon
         return $stmt->fetch();

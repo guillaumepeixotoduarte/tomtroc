@@ -75,6 +75,8 @@ class UserController extends Controller {
                 $_SESSION['user'] = [
                     'id' => $user->getId(),
                     'username' => $user->getUsername(),
+                    'email' => $user->getEmail(),
+                    'profil_image' => $user->getProfilImage(),
                     'role' => $user->getRole()
                 ];
 
@@ -124,6 +126,97 @@ class UserController extends Controller {
                 redirect('register');
             }
         }
+    }
+
+    public function updateProfile(){
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            redirect('my-profile');
+        }
+
+        $userManager = new UserManager();
+        $user = $userManager->findById($_SESSION['user']['id']);
+        if (!$user) {
+            $_SESSION['error'] = "Utilisateur introuvable.";
+            redirect('login');
+        }
+
+        $username = trim(htmlspecialchars($_POST['pseudo']));
+        $email    = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+        $password = $_POST['password'];
+
+        if (empty($username) || empty($email) || empty($password) || strlen($password) < 8) {
+            $_SESSION['error'] = "Veuillez remplir les champs correctement (Mot de passe : 8 caractères min).";
+            redirect(path: 'my-profile');
+        }
+        
+        $existingUser = $userManager->findByEmailOrUsername($email, $username, true);
+        
+        if ($existingUser) {
+            $_SESSION['error'] = "Ce pseudo est déjà pris.";
+            if ($existingUser['email'] === $email) {
+                $_SESSION['error'] = "Cette adresse email est déjà utilisée.";
+            }
+            redirect('my-profile');
+        }
+
+        $update = $userManager->updateProfile($user->getId(), $username, $email, $password);
+
+        if (!$update) {
+            $_SESSION['error'] = "Erreur lors de la mise à jour du profil.";
+            redirect(path: 'my-profile');
+        }
+
+        $_SESSION['user']['username'] = $username; // Met à jour le nom d'utilisateur en session
+        $_SESSION['user']['email'] = $email; // Met à jour l'email en session
+        $_SESSION['success'] = "Profil mis à jour avec succès !";
+        redirect(path: 'my-profile');
+
+    }
+
+    public function updateProfileImage(){
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            redirect('my-profile');
+        }
+
+        $userManager = new UserManager();
+        $user = $userManager->findById($_SESSION['user']['id']);
+        if (!$user) {
+            $_SESSION['error'] = "Utilisateur introuvable.";
+            redirect('login');
+        }
+
+        $actualImage = $user->getProfilImage();
+
+        if (!isset($_FILES['profileImageInput']) || $_FILES['profileImageInput']['error'] !== 0) {
+
+            $_SESSION['error'] = "Une erreur est survenue lors de la récupération de l'image";
+            redirect('my-profile');
+
+        }
+
+        $newName = $this->uploadImage($_FILES['profileImageInput'], 'profile_image', 'profil_');
+
+        if (!$newName) {
+            $_SESSION['error'] = "Une erreur est survenue lors de l'enregistrement de l'image";
+            redirect('my-profile');
+        }
+            
+        $success = $userManager->updateProfileImage($user->getId(), $newName);
+
+        if (!$success) {
+            $this->deleteImage($newName, 'profile_image');
+            $_SESSION['error'] = "Une erreur est survenue lors l'enregistrement des informations.";
+            redirect('my-profile');
+        }
+
+        // On nettoie l'ancien fichier si ce n'était pas l'image par défaut
+        if ($actualImage !== NULL) {
+            $this->deleteImage($actualImage, 'profile_image');
+        }
+        // Mettre à jour la session
+        $_SESSION['user']['profil_image'] = $newName;
+        
+        redirect('my-profile');
     }
 
 }
