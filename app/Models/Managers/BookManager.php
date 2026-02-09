@@ -58,32 +58,46 @@ class BookManager {
 
     /**
      * Récupère les derniers livres ajoutés
+     * @param string $search Permet de recherche les livres contenant la valeur passé
      * @param int|null $limit Nombre de livres à récupérer
      * @param int|null $includeUser Si on veut récupérer l'username et la photo de profil de l'utilisateur lié au livre
      * @return array Tableau d'objets Book
      */
-    public function findFiltered(int|null $limit = null, bool $includeUser = false): array
+    public function findFiltered(string $search, int|null $limit = null, bool $includeUser = false): array
     {
         $select = "SELECT b.*";
         $join = "";
-        
+        $where = " WHERE 1=1"; // Astuce pour chaîner les "AND" facilement
+        $params = [];
+
         if ($includeUser) {
             $select .= ", u.username, u.profil_image";
             $join = " INNER JOIN users u ON b.user_id = u.id";
         }
 
-        // On ne récupère que les livres dont le statut est "disponible" (souvent 1 en BDD)
-        $sql = "$select FROM books b $join ORDER BY b.id DESC";
+        // Gestion de la recherche par titre
+        if ($search && $search != '') {
+            $where .= " AND b.title LIKE :search";
+            $params['search'] = '%' . $search . '%';
+        }
+
+        $sql = "$select FROM books b $join $where ORDER BY b.id DESC";
 
         if ($limit !== null) {
             $sql .= " LIMIT :limit";
         }
         
         $stmt = $this->db->prepare($sql);
-        // On force le type en INT car PDO a parfois du mal avec LIMIT et les strings
+
+        // Liaison des paramètres
+        foreach ($params as $key => $value) {
+            $stmt->bindValue($key, $value);
+        }
+        
         if ($limit !== null) {
             $stmt->bindValue(':limit', $limit, \PDO::PARAM_INT);
         }
+
         $stmt->execute();
         
         $data = $stmt->fetchAll();
