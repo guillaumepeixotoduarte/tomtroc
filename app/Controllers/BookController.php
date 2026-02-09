@@ -10,12 +10,6 @@ use App\Core\Controller;
 
 class BookController extends Controller {
     
-    
-    public function index() {
-
-        require_once ROOT . '/views/books/list.php';
-    }
-
     // Page : Détails d'un livre spécifique
     public function show($id) {
 
@@ -66,26 +60,64 @@ class BookController extends Controller {
     }
 
     public function saveBook() {
-        
         $bookManager = new BookManager();
+        $id = $_POST['id'] ?? null;
         
-        if(isset($_POST['id']) && !empty($_POST['id'])) {
-            // En mode modification, on vérifie que le livre existe et appartient à l'utilisateur
-            $existingBook = $bookManager->findOne((int)$_POST['id']);
-            if (!$existingBook || !isset($_SESSION['user']['id']) || $existingBook->getUserId() !== $_SESSION['user']['id']) {
-                $_SESSION['error'] = "Livre introuvable ou accès refusé.";
-                redirect('login');
+        $existingBook = $id ? $bookManager->findOne((int)$id) : null;
+        $imageName = $existingBook ? $existingBook->getImage() : null;
+
+        // On vérifie si une image est passé
+        if (!empty($_FILES['cover_image']['name'])) {
+            $uploadedFile = $this->uploadImage($_FILES['cover_image'], 'book_cover', 'book_');
+            
+            if ($uploadedFile) {
+                // On mémorise l'ancienne image pour la supprimer plus tard
+                $oldImageToDelete = $imageName; 
+                $imageName = $uploadedFile;
+            }else{
+                redirect($id ? 'book/edit/'.$id : 'book/edit');
             }
         }
 
-        // On passe $_POST pour les textes et $_FILES pour l'image
-        if ($bookManager->save($_POST, $_FILES['cover_image'])) {
-            $_SESSION['success'] = "Livre enregistré avec succès !";
-            redirect('my-profile');
-        } else {
-            $_SESSION['error'] = "Une erreur est survenue.";
-            redirect('book/edit' . (isset($_POST['id']) ? '/' . $_POST['id'] : ''));
+        // Si $imageName est vide c'est que ce n'est pas livre existant et que l'ajout d'un nouveau livre n'a pas passé d'image
+        if (!$imageName) {
+            $_SESSION['error'] = "Une image de couverture est requise.";
+            redirect($id ? 'book/edit/'.$id : 'book/edit');
         }
+
+        // 4. Enregistrement unique
+        if ($bookManager->save($_POST, $imageName)) {
+            // Si tout est OK, on nettoie l'ancienne image si elle a été remplacée
+            if (!empty($oldImageToDelete)) {
+                $this->deleteImage($oldImageToDelete, 'book_cover');
+            }
+            $_SESSION['success'] = "Livre enregistré !";
+            redirect('my-profile');
+        }
+
+        // Si on arrive ici, c'est que la BDD a échoué
+        $_SESSION['error'] = "Erreur lors de l'enregistrement.";
+        redirect($id ? 'book/edit/'.$id : 'book/edit');
+    }
+
+    public function deleteBook(int $id){
         
+        $bookManager = new BookManager();
+        
+        $book = $bookManager->findOne((int)$id);
+        
+        // Sécurité : on vérifie que le livre appartient bien à l'utilisateur connecté
+        if (!$book || $book->getUserId() !== $_SESSION['user']['id']) {
+            $_SESSION['error'] = "Livre introuvable ou accès refusé.";
+            redirect(path: 'my-profile');
+        }
+    
+        if($bookManager->deleteByID($id)){
+            $_SESSION['success'] = "Livre supprimé avec succès";
+            $this->deleteImage($book->getImage(), 'book_cover');
+        }else{
+            $_SESSION['error'] = "Une erreur s'est produite lors de la suppression du livre";
+        }
+        redirect(path: 'my-profile');
     }
 }

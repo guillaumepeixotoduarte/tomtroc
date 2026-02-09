@@ -204,8 +204,19 @@ h1{
 }
 
 .profile-badge img {
-    height: 100%;
-    margin-right: 5px;
+    height: 48px;
+    width: 48px;
+    margin-right: 8px;
+}
+
+/* ---------- Formulaire livre -------------- */
+
+#cover-image{
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
+    position: absolute;
 }
 
 
@@ -242,6 +253,11 @@ h1{
 .table-books-list-bg > div:last-child {
     border-bottom-left-radius: var(--bs-border-radius-xl);
     border-bottom-right-radius: var(--bs-border-radius-xl);
+}
+
+.profil-image{
+    width: 100px;
+    height: 100px;
 }
 
 @media (min-width:768px) and (max-width: 992px) {
