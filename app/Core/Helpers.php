@@ -11,13 +11,6 @@
     }
 
     /**
-     * Nettoie une entrée utilisateur pour éviter les failles XSS et autres problèmes de sécurité
-     */
-    function sanitizeInput($data) {
-        return htmlspecialchars(strip_tags(trim($data)));
-    }
-
-    /**
      * Construit une URL complète à partir d'un chemin relatif
      */
     function url($path) {
@@ -75,7 +68,7 @@
 
         if (!$isPublic && !isLogged()) {
             $_SESSION['error'] = "Veuillez vous connecter pour accéder à cette page.";
-            header('Location: ' . url('/login'));
+            header('Location: ' . url('login'));
             exit;
         }
     }
