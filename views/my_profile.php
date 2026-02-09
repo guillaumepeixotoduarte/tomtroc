@@ -5,8 +5,13 @@
             <div class="col-12 col-lg-6 pe-lg-3">
                 <div class="d-flex justify-content-center align-items-center flex-column p-3 bg-white rounded-4 h-100">
                     <div class="d-flex flex-column align-items-center justify-content-center my-4">
-                        <img src="<?= !empty($user->getProfilImage()) ? $user->getProfilImage() : 'img/default-profil-image.png' ?>" alt="Icône utilisateur" class="mb-1 w-75" >
-                        <a class="grey-text font-size-12" href="#">Modifier l'image</a>
+                        <img src="<?= !empty($user->getProfilImage()) ? getProfileImageUrl($user->getProfilImage()) : 'img/default-profil-image.png' ?>" alt="Icône utilisateur" class="mb-1 profil-image rounded-circle" >
+                        <form id="profileImageForm" action="<?= url('/update-profile-image') ?>" method="POST" enctype="multipart/form-data">
+                            <label for="profileImageInput" class="grey-text text-decoration-underline cursor-pointer font-size-12">
+                                Modifier l'image
+                            </label>
+                            <input type="file" id="profileImageInput" name="profileImageInput" class="d-none" accept="image/*" >
+                        </form>
                     </div>
                     <hr class="w-50 grey-text">
                     <div class="text-center  my-4">
@@ -20,8 +25,17 @@
             
             <div class="col-12 col-lg-6 ps-lg-3">
                 <div class="p-sm-5 p-4 bg-white rounded-4 mt-4 mt-lg-0 h-100">
-                    <form class="px-md-5 px-sm-2 px-0" method="post" action="<?= url('/my-profile/update') ?>">
+                    <form class="px-md-5 px-sm-2 px-0" method="post" action="<?= url('/my-profile-update') ?>">
                         <h5 class="mb-4">Vos informations personnelles</h5>
+
+                        <?php if(isset($_SESSION['success'])): ?>
+                            <div class="alert alert-success mb-4"><?= $_SESSION['success']; unset($_SESSION['success']); ?></div>
+                        <?php endif; ?>
+
+                        <?php if(isset($_SESSION['error'])): ?>
+                            <div class="alert alert-danger mb-4"><?= $_SESSION['error']; unset($_SESSION['error']); ?></div>
+                        <?php endif; ?>
+
                         <div class="mb-4 grey-text">
                             <label for="email" class="form-label font-size-14 mb-1">Adresse mail</label>
                             <input type="email" class="form-control light-blue-bg-color" id="email" name="email" value="<?= $user->getEmail() ?>">
@@ -65,7 +79,7 @@
                             <div class="col-2 ps-0 d-flex align-items-center"><span class="<?= $book->getStatutExchange() ? 'disponible-badge' : 'indisponible-badge' ?>"><?= $book->getStatutExchange() ? 'Disponible' : 'Indisponible' ?></span></div>
                             <div class="col-2 ps-0 d-flex justify-content-between align-items-center flex-wrap">
                                 <a href="<?= url('book/edit/'.$book->getId()) ?>" class="text-black text-decoration-underline">Éditer</a>
-                                <a href="<?= url('/profile/delete-book/' . $book->getId()) ?>" class="text-danger text-decoration-underline" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">Supprimer </a>
+                                <a href="<?= url('book/delete/' . $book->getId()) ?>" class="text-danger text-decoration-underline" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">Supprimer </a>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -88,7 +102,7 @@
                        
                         <div class="col-12 my-4 d-flex justify-content-around align-items-center flex-row">
                             <a href="<?= url('book/edit/'.$book->getId()) ?>" class="text-black text-decoration-underline">Éditer</a>
-                            <a href="<?= url('/profile/delete-book/' . $book->getId()) ?>" class="text-danger text-decoration-underline" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">Supprimer </a>
+                            <a href="<?= url('/book/delete/' . $book->getId()) ?>" class="text-danger text-decoration-underline" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">Supprimer </a>
                         </div>
                     </div>
                 <?php endforeach; ?>

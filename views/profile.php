@@ -4,7 +4,7 @@
             <div class="col-12 col-md-4 pe-lg-3">
                 <div class="d-flex justify-content-center align-items-center flex-column p-3 bg-white rounded-4 h-100">
                     <div class="d-flex flex-column align-items-center justify-content-center my-4">
-                        <img src="<?= !empty($user->getProfilImage()) ? $user->getProfilImage() : url('img/default-profil-image.png') ?>" alt="Icône utilisateur" class="mb-1 w-75" >
+                        <img src="<?= !empty($user->getProfilImage()) ? getProfileImageUrl($user->getProfilImage()) : url('img/default-profil-image.png') ?>" alt="Icône utilisateur" class="mb-1 profil-image rounded-circle" >
                     </div>
                     <hr class="w-50 grey-text">
                     <div class="text-center  my-4">
