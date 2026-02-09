@@ -6,7 +6,7 @@
                 <div class="d-flex justify-content-center align-items-center flex-column p-3 bg-white rounded-4 h-100">
                     <div class="d-flex flex-column align-items-center justify-content-center my-4">
                         <img src="<?= !empty($user->getProfilImage()) ? getProfileImageUrl($user->getProfilImage()) : 'img/default-profil-image.png' ?>" alt="Icône utilisateur" class="mb-1 profil-image rounded-circle" >
-                        <form id="profileImageForm" action="<?= url('/update-profile-image') ?>" method="POST" enctype="multipart/form-data">
+                        <form id="profileImageForm" action="<?= url('update-profile-image') ?>" method="POST" enctype="multipart/form-data">
                             <label for="profileImageInput" class="grey-text text-decoration-underline cursor-pointer font-size-12">
                                 Modifier l'image
                             </label>
@@ -25,7 +25,7 @@
             
             <div class="col-12 col-lg-6 ps-lg-3">
                 <div class="p-sm-5 p-4 bg-white rounded-4 mt-4 mt-lg-0 h-100">
-                    <form class="px-md-5 px-sm-2 px-0" method="post" action="<?= url('/my-profile-update') ?>">
+                    <form class="px-md-5 px-sm-2 px-0" method="post" action="<?= url('my-profile-update') ?>">
                         <h5 class="mb-4">Vos informations personnelles</h5>
 
                         <?php if(isset($_SESSION['success'])): ?>
@@ -56,7 +56,7 @@
 
         <div class="col-12 d-flex justify-content-between align-items-center mt-5 mt-lg-2 mb-2">
             <h5 class="my-auto">Ma bibliothèque</h5>
-            <a href="<?= url('/book/edit') ?>" class="my-auto text-black">Ajouter un livre</a>
+            <a href="<?= url('book/edit') ?>" class="my-auto text-black">Ajouter un livre</a>
         </div>
         <?php if (!empty($books)): ?>
             <div class="bg-white rounded-4 d-none d-md-block">
@@ -102,13 +102,13 @@
                        
                         <div class="col-12 my-4 d-flex justify-content-around align-items-center flex-row">
                             <a href="<?= url('book/edit/'.$book->getId()) ?>" class="text-black text-decoration-underline">Éditer</a>
-                            <a href="<?= url('/book/delete/' . $book->getId()) ?>" class="text-danger text-decoration-underline" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">Supprimer </a>
+                            <a href="<?= url('book/delete/' . $book->getId()) ?>" class="text-danger text-decoration-underline" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">Supprimer </a>
                         </div>
                     </div>
                 <?php endforeach; ?>
             </div>
         <?php else: ?>
-            <p class="p-4">Vous n'avez pas encore ajouté de livres à votre bibliothèque. <a href="<?= url('/book/edit') ?>">Ajoutez-en un maintenant !</a></p>
+            <p class="p-4">Vous n'avez pas encore ajouté de livres à votre bibliothèque. <a href="<?= url('book/edit') ?>">Ajoutez-en un maintenant !</a></p>
         <?php endif; ?>
         </div>
     </div>

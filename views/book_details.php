@@ -18,7 +18,7 @@
                     </a>
 
                     <?php if (isset($_SESSION['user']) && $_SESSION['user']['id'] !== $book->getUserId()): ?>
-                        <a href="<?= url('/message/send/' . $book->getUserId()) ?>" class="classic-button green-button text-decoration-none w-100 d-block mt-5 text-center">
+                        <a href="<?= url('messagerie/contact/' . $book->getUserId()) ?>" class="classic-button green-button text-decoration-none w-100 d-block mt-5 text-center">
                             Envoyer un message
                         </a>
                     <?php elseif(!isset($_SESSION['user'])): ?>

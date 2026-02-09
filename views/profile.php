@@ -14,7 +14,7 @@
                         <p class="mt-0 font-size-14"><i class="bi bi-book"></i> <?= count($books) ?> livre<?= count($books) > 1 ? 's' : '' ?></p>
 
                         <?php if (isset($_SESSION['user']) && $_SESSION['user']['id'] !== $user->getId()): ?>
-                            <a href="<?= url('/message/send/' . $user->getId()) ?>" class="classic-button green-button text-decoration-none w-100 d-block mt-5 text-center">
+                            <a href="<?= url('messagerie/contact/' . $user->getId()) ?>" class="classic-button green-button text-decoration-none w-100 d-block mt-5 text-center">
                                 Envoyer un message
                             </a>
                         <?php elseif(!isset($_SESSION['user'])): ?>

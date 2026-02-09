@@ -25,8 +25,8 @@
             <?php if(!empty($latestBooks)): ?>
                 <?php foreach($latestBooks as $book): ?>
 
-                    <a href="<?= url('book/detail/' . $book->getId()) ?>" class="col">
-                        <div class="card border-0 rounded-bottom">
+                    <a href="<?= url('book/detail/' . $book->getId()) ?>" class="col text-decoration-none text-black">
+                        <div class="card border-0 rounded-bottom h-100">
                             <img src="<?= getBookImageUrl($book->getImage()) ?>" alt="<?= $book->getTitle() ?>" class="w-100">
                             <div class="card-body text-start">
                                 <p class="font-size-14 mb-2"><?= $book->getTitle() ?></p>
@@ -40,7 +40,6 @@
             <?php else: ?>
                 <p class="text-center">Aucun livre disponible pour le moment.</p>
             <?php endif; ?>
-            <!-- Les livres seront chargés ici dynamiquement -->
         </div>
         <button class="classic-button green-button mt-3 w-100 w-sm-auto">Voir tous les livres</button>
     </div>
