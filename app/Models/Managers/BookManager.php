@@ -59,9 +59,10 @@ class BookManager {
     /**
      * Récupère les derniers livres ajoutés
      * @param int|null $limit Nombre de livres à récupérer
+     * @param int|null $includeUser Si on veut récupérer l'username et la photo de profil de l'utilisateur lié au livre
      * @return array Tableau d'objets Book
      */
-    public function findAll(int|null $limit = null, bool $includeUser = false): array
+    public function findFiltered(int|null $limit = null, bool $includeUser = false): array
     {
         $select = "SELECT b.*";
         $join = "";

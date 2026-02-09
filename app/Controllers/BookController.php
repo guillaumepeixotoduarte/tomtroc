@@ -29,7 +29,7 @@ class BookController extends Controller {
 
     public function ourBooks() {
         $bookManager = new BookManager();
-        $books = $bookManager->findAll(null, true); // Récupère tous les livres disponibles avec les infos utilisateur
+        $books = $bookManager->findFiltered(null, true); // Récupère tous les livres disponibles avec les infos utilisateur
 
         $this->render('our_books', [
             'title' => 'Nos livres disponibles',
