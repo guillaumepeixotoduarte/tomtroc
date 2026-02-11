@@ -93,7 +93,6 @@ switch ($params[0]) {
         } 
         elseif ($action === 'save-book'){
             $controller->saveBook();
-            break;
         }
         elseif ($action === 'detail') {
             $id = (isset($params[2]) && is_numeric($params[2])) ? $params[2] : null; 
@@ -106,6 +105,26 @@ switch ($params[0]) {
             $id = $params[2] ?? null;
             $controller->deleteBook($id);
         }
+        break;
+
+    case 'messagerie':
+        
+        require_once ROOT . '/app/Controllers/MessagerieController.php'; 
+        $controller = new MessagerieController();
+        $action = $params[1] ?? 'index';
+
+        if($action == 'index'){
+            $controller->index();
+        }elseif($action == 'envoi'){
+            $controller->handlePostMessage();
+        }elseif($action == 'contact'){
+            $id_contact = (isset($params[2]) && is_numeric($params[2])) ? $params[2] : null; 
+            $controller->contactOwner($id_contact);
+        }elseif($action == 'conversation'){
+            $id_conversation = (isset($params[2]) && is_numeric($params[2])) ? $params[2] : null; 
+            $controller->conversationWithOtherUser($id_conversation);
+        }
+
         break;
 
     default:

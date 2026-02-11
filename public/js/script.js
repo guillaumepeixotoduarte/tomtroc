@@ -1,5 +1,6 @@
 const coverInput = document.getElementById('cover-image');
 const profilImageInput = document.getElementById('profileImageInput');
+const chatWindow = document.getElementById('chat-window');
 
 if(coverInput) {
     coverInput.addEventListener('change', function(event) {
@@ -29,4 +30,8 @@ if(profilImageInput) {
             }, 100);
         }
     });
+}
+
+if (chatWindow) {
+    chatWindow.scrollTop = chatWindow.scrollHeight;
 }

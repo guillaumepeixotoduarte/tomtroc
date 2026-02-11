@@ -71,6 +71,10 @@ main{
     background-color: var(--light-blue-color);
 }
 
+.green-bg-color{
+    background-color: var(--mid-green-color);
+}
+
 .cursor-pointer{
     cursor: pointer;
 }
@@ -106,6 +110,33 @@ main{
     max-width: 1000px;
 }
 
+.truncate-text{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.profile-img-small {
+    height: 48px;
+    width: 48px;
+    margin-right: 8px;
+}
+
+.profile-img-xs {
+    height: 24px;
+    width: 24px;
+    margin-right: 8px;
+}
+
+.justify-content-flex-end{
+    justify-content: flex-end;
+}
+
+.mirror-horizontal{
+    display: inline-block;
+    transform: scaleX(-1);
+}
+
 @media (min-width: 576px) {
     .w-sm-auto{
         width: auto !important;
@@ -116,6 +147,21 @@ main{
 
 #logo-nav{
     height: 40px;
+}
+
+.messagerie-badge{
+    background-color: black;
+    color: white;
+    padding: 2px;
+    border-radius: 20px;
+    vertical-align: middle;
+}
+
+.nav-separator{
+    width: 1px;
+    padding: 0px;
+    height: 20px;
+    background-color: var(--grey-text-color);
 }
 
 /* ----- Home ----- */
@@ -181,10 +227,6 @@ main{
 
 /* ------- Nos livres -------- */
 
-#searchInput::placeholder {
-    color: var(--grey-text-color) !important;
-}
-
 #searchInput{
     border: none !important;
     box-shadow: none !important;
@@ -206,12 +248,6 @@ main{
     border: none;
     border-radius: 30px;
     background-color: white;
-}
-
-.profile-badge img {
-    height: 48px;
-    width: 48px;
-    margin-right: 8px;
 }
 
 .profile-badge:hover img{
@@ -277,4 +313,34 @@ main{
     .profil-book-list{
         padding: 0 20px;
     }
+}
+
+/* ----------- Messagerie ----------- */
+
+.message-content{
+    width: fit-content;
+    max-width: 70%;
+}
+
+.unread-count{
+    background: var(--mid-green-color); /* Bleu type Messenger ou Rouge */
+    color: white;
+    font-size: 0.75rem;
+    padding: 2px 4px;
+    border-radius: 12px;
+    font-weight: bold;
+}
+
+#conversation-content{
+    max-height: calc(100vh - 154px);
+
+}
+
+#conversation-content .overflow-auto{
+    scrollbar-width: none; /* Pour Firefox */
+    -ms-overflow-style: none; /* Pour Internet Explorer et Edge */
+}
+
+#conversation-content .overflow-auto::-webkit-scrollbar{
+    display: none; /* Pour Chrome, Safari et Opera */
 }

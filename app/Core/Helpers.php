@@ -34,7 +34,10 @@
      */
     function navBarIsActive($pagePath) {
         // On récupère l'URL actuelle depuis le GET (définie dans ton index.php)
-        $currentPath = $_GET['url'] ?? 'home';
+        $currentUrl = $_GET['url'] ?? 'home';
+        $url = rtrim($currentUrl, '/');
+        $params = explode('/', $url);
+        $currentPath = $params[0];
         
         // On nettoie les slashs pour comparer proprement
         return trim($currentPath, '/') === trim($pagePath, '/') ? 'active fw-semibold' : '';
