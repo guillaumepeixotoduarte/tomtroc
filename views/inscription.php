@@ -3,7 +3,7 @@
         <div class="col-12 col-lg-6 px-4 px-lg-0">
             <div class="row">
                 <div class="col-12 col-sm-10 col-md-8 col-lg-8 col-xl-7 mb-4 mb-lg-0 mx-auto">
-                    <form class="mt-5 pt-lg-5" action="<?= url('/inscription-save') ?>" method="post">
+                    <form class="mt-5 pt-lg-5" action="<?= url('inscription-save') ?>" method="post">
                         <h2 class="my-5">Inscription</h2>
                         
                         <?php if(isset($_SESSION['error'])): ?>
