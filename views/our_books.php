@@ -4,7 +4,7 @@
             <h2>Nos livres à l'échange</h2>
             <form method="GET" action="<?= url('nos-livres') ?>" class="search-container d-flex align-items-center my-3 px-2 py-1 border rounded-2 bg-white  col-12 col-sm-auto">
                 <i class="bi bi-search pe-2 grey-text"></i>
-                <input type="text" name="search" class="border-0 shadow-none ps-0" value="<?= htmlspecialchars($_GET['search'] ?? '') ?>" placeholder="Rechercher un livre" id="searchInput">
+                <input type="text" name="search" class="border-0 shadow-none ps-0 grey-placeholder" value="<?= htmlspecialchars($_GET['search'] ?? '') ?>" placeholder="Rechercher un livre" id="searchInput">
             </form>
         </div>
         <?php if(!empty($books)): ?>
