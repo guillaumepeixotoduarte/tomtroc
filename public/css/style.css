@@ -30,7 +30,7 @@ h1{
 }
 
 main{
-    min-height: calc(100vh - 154px);
+    min-height: calc(100vh - 140px);
 }
 
 /* -------- Classe global ------- */
@@ -147,6 +147,12 @@ main{
 
 #logo-nav{
     height: 40px;
+}
+
+nav{
+   height: 80px; 
+   padding-top: 15px !important;
+   padding-bottom: 15px !important;
 }
 
 .messagerie-badge{
@@ -332,8 +338,7 @@ main{
 }
 
 #conversation-content{
-    max-height: calc(100vh - 154px);
-
+    max-height: calc(100vh - 140px);
 }
 
 #conversation-content .overflow-auto{
@@ -343,4 +348,16 @@ main{
 
 #conversation-content .overflow-auto::-webkit-scrollbar{
     display: none; /* Pour Chrome, Safari et Opera */
+}
+
+
+/* ------ Footer ------- */
+
+footer{
+    height: 60px;
+}
+
+footer img{
+    width: 22px;
+    height: 18px;
 }
