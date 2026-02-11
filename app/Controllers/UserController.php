@@ -80,7 +80,6 @@ class UserController extends Controller {
                     'role' => $user->getRole()
                 ];
 
-                $_SESSION['success'] = "Ravi de vous revoir, " . $user->getUsername() . " !";
                 redirect(path: 'my-profile');
             } else {
                 $_SESSION['error'] = "Identifiants invalides.";
