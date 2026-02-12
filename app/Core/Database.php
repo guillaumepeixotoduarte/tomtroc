@@ -10,9 +10,9 @@ class Database {
             try {
                 // Adapte avec tes identifiants Wamp
                 self::$instance = new \PDO(
-                    "mysql:host=localhost;dbname=tom_troc;charset=utf8", 
-                    "root", 
-                    ""
+                    "mysql:host=localhost;dbname=tom_troc;charset=utf8",
+                    "", // Mettre votre identifiant de connexion à la BDD
+                    "" // Mettre votre mot de passe de connexion à la BDD
                 );
                 self::$instance->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
             } catch (\PDOException $e) {
