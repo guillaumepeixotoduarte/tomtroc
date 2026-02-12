@@ -120,12 +120,14 @@ main{
     height: 48px;
     width: 48px;
     margin-right: 8px;
+    aspect-ratio: 1 / 1;
 }
 
 .profile-img-xs {
     height: 24px;
     width: 24px;
     margin-right: 8px;
+    aspect-ratio: 1 / 1;
 }
 
 .justify-content-flex-end{
@@ -150,7 +152,7 @@ main{
 }
 
 nav{
-   height: 80px; 
+   min-height: 80px; 
    padding-top: 15px !important;
    padding-bottom: 15px !important;
 }

@@ -39,7 +39,7 @@
                                     $unreadCount = $conversationManager->findUnreadConversations((int)$_SESSION['user']['id']);
                                 
                                 ?>
-                                <li class="nav-item mx-3 d-flex align-items-center">
+                                <li class="nav-item mx-3 d-none d-lg-flex align-items-center">
                                     <span class="nav-link nav-separator p-0"></span>
                                 </li>
                                 <li class="nav-item mx-3 d-flex align-items-center">
