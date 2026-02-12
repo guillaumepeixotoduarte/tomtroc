@@ -29,10 +29,9 @@ h1{
     font-size: 36px;
 }
 
-main{
-    min-height: calc(100vh - 140px);
+h2{
+    font-size: clamp(30px, 0.563vw + 27.89px, 36px);
 }
-
 /* -------- Classe global ------- */
 
 .font-size-16{
@@ -106,8 +105,8 @@ main{
     cursor: pointer;
 }
 
-.max-width-1000{
-    max-width: 1000px;
+.max-width-1140{
+    max-width: 1140px;
 }
 
 .truncate-text{
@@ -139,9 +138,45 @@ main{
     transform: scaleX(-1);
 }
 
+.disponible-badge {
+    background-color: var(--mid-green-color);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+
+.indisponible-badge {
+    background-color: var(--light-red-color);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+
+
+.indisp-badge-card{
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    font-size: 9px;
+    padding: 2px 10px; 
+}
+
+.min-screen-height{
+    min-height: calc(100vh - 140px);
+    display: flex;
+}
+
 @media (min-width: 576px) {
     .w-sm-auto{
         width: auto !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .min-screen-height{
+        min-height: calc(100vh - 247px);
     }
 }
 
@@ -170,6 +205,21 @@ nav{
     padding: 0px;
     height: 20px;
     background-color: var(--grey-text-color);
+}
+
+.navbar-nav .nav-item:hover{
+    font-weight: 600;
+}
+
+/* ------ Footer ------- */
+
+footer{
+    min-height: 60px;
+}
+
+footer img{
+    width: 22px;
+    height: 18px;
 }
 
 /* ----- Home ----- */
@@ -283,22 +333,6 @@ nav{
     max-width: 100px;
 }
 
-.disponible-badge {
-    background-color: var(--mid-green-color);
-    color: white;
-    padding: 5px 10px;
-    border-radius: 12px;
-    font-size: 12px;
-}
-
-.indisponible-badge {
-    background-color: var(--light-red-color);
-    color: white;
-    padding: 5px 10px;
-    border-radius: 12px;
-    font-size: 12px;
-}
-
 .profil-book-list{
     padding: 0 50px;
 }
@@ -341,6 +375,7 @@ nav{
 
 #conversation-content{
     max-height: calc(100vh - 140px);
+    background-color: var(--main-bg-color);
 }
 
 #conversation-content .overflow-auto{
@@ -352,14 +387,9 @@ nav{
     display: none; /* Pour Chrome, Safari et Opera */
 }
 
-
-/* ------ Footer ------- */
-
-footer{
-    min-height: 60px;
-}
-
-footer img{
-    width: 22px;
-    height: 18px;
+@media (max-width:992px) {
+    #conversation-content{
+        background-color: var(--second-bg-color);
+        max-height: calc(100vh - 247px);
+    }
 }

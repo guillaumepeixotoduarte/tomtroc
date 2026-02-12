@@ -1,5 +1,12 @@
-<div class="container-fluid p-md-5 p-4 m-0 h-100 second-bg-color">
-    <div class="max-width-1000 mx-auto">
+<div class="container-fluid p-md-5 p-3 m-0 h-100 second-bg-color">
+    <div class="max-width-1140 mx-auto">
+        <?php if(isset($_SESSION['success'])): ?>
+            <div class="alert alert-success mb-4"><?= $_SESSION['success']; unset($_SESSION['success']); ?></div>
+        <?php endif; ?>
+
+        <?php if(isset($_SESSION['error'])): ?>
+            <div class="alert alert-danger mb-4"><?= $_SESSION['error']; unset($_SESSION['error']); ?></div>
+        <?php endif; ?>
         <h2 class="py-4 px-0">Mon compte</h2>
         <div class="row">
             <div class="col-12 col-lg-6 pe-lg-3">
@@ -27,14 +34,6 @@
                 <div class="p-sm-5 p-4 bg-white rounded-4 mt-4 mt-lg-0 h-100">
                     <form class="px-md-5 px-sm-2 px-0" method="post" action="<?= url('my-profile-update') ?>">
                         <h5 class="mb-4">Vos informations personnelles</h5>
-
-                        <?php if(isset($_SESSION['success'])): ?>
-                            <div class="alert alert-success mb-4"><?= $_SESSION['success']; unset($_SESSION['success']); ?></div>
-                        <?php endif; ?>
-
-                        <?php if(isset($_SESSION['error'])): ?>
-                            <div class="alert alert-danger mb-4"><?= $_SESSION['error']; unset($_SESSION['error']); ?></div>
-                        <?php endif; ?>
 
                         <div class="mb-4 grey-text">
                             <label for="email" class="form-label font-size-14 mb-1">Adresse mail</label>

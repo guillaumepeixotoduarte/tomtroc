@@ -1,8 +1,8 @@
-<div class="container-fluid p-5 pt-4 m-0 h-100 second-bg-color">
-    <div class="max-width-1000 mx-auto">
+<div class="container-fluid p-3 p-md-5 pt-4 m-0 h-100 second-bg-color">
+    <div class="max-width-1140 mx-auto">
         <a class="grey-text font-size-12 text-decoration-none" href="<?= url('my-profile') ?>"> <i class="bi bi-arrow-left"></i> retour </a>
         <h3 class="my-3"><?= $title ?></h3>
-        <form class="p-4 bg-white rounded-4 mt-3 row" method="post" action="<?= url('book/save-book') ?>" enctype="multipart/form-data">
+        <form class="p-4 bg-white rounded-4 mt-3 row mx-0" method="post" action="<?= url('book/save-book') ?>" enctype="multipart/form-data">
             <div class="col-12 col-lg-6 mb-3">
                 <div id="preview-img">
                     <img id="preview-image" src="<?= !empty($book) ? getBookImageUrl($book->getImage()) : '../img/default-book-image.jpg' ?>" alt="Aperçu" class="img-fluid">

@@ -1,14 +1,14 @@
 <section class="main-bg-color">
-    <div class="container-fluid px-0 mx-auto px-md-2 pt-0 pt-sm-5 pb-5 d-flex align-items-center max-width-1000" >
+    <div class="container-fluid px-0 mx-auto px-md-2 pt-0 pt-sm-5 pb-0 pb-lg-5 d-flex align-items-center max-width-1140" >
         <div class="row w-100 m-0 flex-wrap-reverse"> 
-            <div class="section-text-content col-12 col-lg-6 px-4 px-sm-0 my-5 my-lg-auto">
+            <div class="section-text-content col-12 col-lg-6 px-3 px-sm-0 my-5 my-lg-auto">
                 <h1>Rejoignez nos lecteurs passionnés</h1>
                 <p>Donnez une nouvelle vie à vos livres en les échangeant avec d'autres amoureux de la lecture. Nous croyons en la magie du partage de connaissances et d'histoires à travers les livres. </p>
-                <button class="classic-button green-button mt-3 w-100 w-sm-auto">Découvrir</button>
+                <a href="<?= url('nos-livres') ?>" class="classic-button green-button d-inline-block text-decoration-none text-center mt-3 w-100 w-sm-auto">Découvrir</a>
             </div>
 
             <div class="col-12 col-lg-6 d-flex flex-column align-items-center align-items-lg-end p-0">
-                <div class="image-wrapper">
+                <div class="image-wrapper col-12 col-md-6 col-lg-9 mx-auto">
                     <img src="img/home_image.png" alt="Echange de livres" class="img-fluid"> 
                     <p class="grey-text font-size-12 fst-italic text-end w-100 my-2 mx-0 pe-2 pe-sm-0">Hamza</p>
                 </div>
@@ -19,10 +19,10 @@
 </section>
 
 <section class="second-bg-color text-center ">
-    <div class="max-width-1000 w-80 mx-auto px-4 px-lg-0 py-5">
-        <h2 class="my-5"> Les derniers livres ajoutés </h2>
-        <div class="py-5 row row-cols-2 row-cols-md-4 g-4">
-            <?php if(!empty($latestBooks)): ?>
+    <div class="max-width-1140 w-80 mx-auto px-3 px-sm-4 px-lg-5 py-5">
+        <h2 class="mt-0 mb-3 my-lg-5 px-5"> Les derniers livres ajoutés </h2>
+        <?php if(!empty($latestBooks)): ?>
+            <div class="py-3 py-lg-5 row row-cols-2 row-cols-md-4 g-4">
                 <?php foreach($latestBooks as $book): ?>
 
                     <a href="<?= url('book/detail/' . $book->getId()) ?>" class="col text-decoration-none text-black">
@@ -37,29 +37,29 @@
                     </a>
 
                 <?php endforeach; ?>
-            <?php else: ?>
-                <p class="text-center">Aucun livre disponible pour le moment.</p>
-            <?php endif; ?>
-        </div>
-        <button class="classic-button green-button mt-3 w-100 w-sm-auto">Voir tous les livres</button>
+            </div>
+            <a href="<?= url('nos-livres') ?>" class="classic-button green-button d-none d-lg-inline-block text-decoration-none text-center w-100 w-sm-auto">Voir tous les livres</a>
+        <?php else: ?>
+            <p class="text-center py-3">Aucun livre disponible pour le moment.</p>
+        <?php endif; ?>
     </div>
 </section>
 
 <section class="main-bg-color">
-    <div class="text-center py-5 px-4 px-lg-0 max-width-1000 w-80 mx-auto">
+    <div class="text-center py-5 px-3 px-sm-4 px-lg-5 px-lg-0 max-width-1140 w-80 mx-auto">
         <h2 class="py-4">Comment ça marche ?</h2>
         <p>Échanger des livres avec TomTroc c’est simple et <br> amusant ! Suivez ces étapes pour commencer :</p>
-        <div class="d-flex justify-content-lg-around justify-content-between flex-column flex-sm-row flex-nowrap flex-sm-wrap flex-lg-nowrap mt-4">
-            <div class="bg-white d-flex rounded-3 home-help-blocs my-2"><p class="m-auto">Inscrivez-vous <br> gratuitement sur <br> notre plateforme.</p></div>
-            <div class="bg-white d-flex rounded-3 home-help-blocs my-2"><p class="m-auto">Ajoutez les livres que vous <br> souhaitez échanger à <br> votre profil.</p></div>
-            <div class="bg-white d-flex rounded-3 home-help-blocs my-2"><p class="m-auto">Parcourez les livres <br> disponibles chez d'autres <br> membres.</p></div>
-            <div class="bg-white d-flex rounded-3 home-help-blocs my-2"><p class="m-auto">Proposez un échange et <br> discutez avec d'autres <br> passionnés de lecture.</p></div>
+        <div class="d-flex justify-content-lg-around justify-content-between flex-column flex-sm-row flex-nowrap flex-sm-wrap flex-lg-nowrap mt-4 p-0 px-xl-5">
+            <div class="bg-white d-flex rounded-3 home-help-blocs my-2"><p class="m-auto px-3">Inscrivez-vous gratuitement sur notre plateforme.</p></div>
+            <div class="bg-white d-flex rounded-3 home-help-blocs my-2"><p class="m-auto px-3">Ajoutez les livres que vous souhaitez échanger à votre profil.</p></div>
+            <div class="bg-white d-flex rounded-3 home-help-blocs my-2"><p class="m-auto px-3">Parcourez les livres disponibles chez d'autres membres.</p></div>
+            <div class="bg-white d-flex rounded-3 home-help-blocs my-2"><p class="m-auto px-3">Proposez un échange et discutez avec d'autres passionnés de lecture.</p></div>
         </div>
-        <button class="classic-button secondary-green-button bg-white mt-3 w-100 w-sm-auto">Voir tous les livres</button>
+        <a href="<?= url('nos-livres') ?>" class="classic-button secondary-green-button d-inline-block text-decoration-none text-center bg-white mt-3 w-100 w-sm-auto">Voir tous les livres</a>
     </div>
     <img class="d-none d-sm-block w-100 object-fit-cover" src="img/second_home_image.png" alt="Echange de livres">
     <img class="w-100 d-sm-none" src="img/second_home_phone_image.png" alt="Echange de livres">
-    <div id="nos-valeurs" class="py-5 px-4 px-lg-0 mx-auto">
+    <div id="nos-valeurs" class="py-5 px-3 px-lg-0 mx-auto">
         <h2 class="mb-4">Nos valeurs</h2>
         <p>
             Chez Tom Troc, nous mettons l'accent sur le partage, la découverte et la communauté. 

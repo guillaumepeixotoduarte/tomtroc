@@ -11,13 +11,13 @@
     <body>
 
         <header class="main-header">
-            <nav class="navbar navbar-expand-lg navbar-light main-bg-color">
-                <div class="container-fluid">
-                    <a class="navbar-brand ms-2 ms-lg-3 me-5 ms-xl-5 ps-1 ps-lg-3 ps-xl-5" href="<?= url('') ?>">
+            <nav class="navbar navbar-expand-lg navbar-light main-bg-color px-3">
+                <div class="container-fluid px-0 mx-auto max-width-1140">
+                    <a class="navbar-brand me-5" href="<?= url('home') ?>">
                         <img src="<?= url('img/logo.png') ?>" id="logo-nav" alt="Logo" class="">
                     </a>
 
-                    <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <button class="navbar-toggler border-0 shadow-none pe-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
@@ -31,7 +31,7 @@
                             </li>
                         </ul>
 
-                        <ul class="navbar-nav font-size-14 me-0 me-xl-5 pe-1 pe-lg-3 pe-xl-5">
+                        <ul class="navbar-nav font-size-14">
                             <?php if(!empty($_SESSION['user'])): ?>
                                 <?php 
                                     require_once ROOT . '/app/Models/Managers/ConversationManager.php';
@@ -53,15 +53,15 @@
                                 <li class="nav-item mx-3 d-flex align-items-center">
                                     <a class="nav-link <?= navBarIsActive('my-profile') ?>" href="<?= url('my-profile') ?>"><i class="bi bi-person-circle"></i> Mon compte</a>
                                 </li>
-                                <li class="nav-item mx-3 d-flex align-items-center">
-                                    <a class="nav-link" href="<?= url('logout') ?>">Déconnexion</a>
+                                <li class="nav-item  ms-3 me-0 d-flex align-items-center">
+                                    <a class="nav-link pe-0" href="<?= url('logout') ?>">Déconnexion</a>
                                 </li>
                             <?php else: ?>
                                 <li class="nav-item mx-3 d-flex align-items-center">
                                     <a class="nav-link <?= navBarIsActive('register') ?>" href="<?= url('register') ?>">Inscription</a>
                                 </li>
-                                <li class="nav-item mx-3 d-flex align-items-center">
-                                    <a class="nav-link <?= navBarIsActive('login') ?>" href="<?= url('login') ?>">Connexion</a>
+                                <li class="nav-item ms-3 me-0 d-flex align-items-center">
+                                    <a class="nav-link pe-0 <?= navBarIsActive('login') ?>" href="<?= url('login') ?>">Connexion</a>
                                 </li>
                             <?php endif; ?>
                         </ul>

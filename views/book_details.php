@@ -1,9 +1,13 @@
+
 <div class="container-fluid m-0 h-100 second-bg-color">
     <div class="row">
+        <div class="col-12 main-bg-color p-3 d-none d-md-block">
+            <p class="max-width-1140 mb-0 mx-auto font-size-10 grey-text">Nos livres > <?= $book->getTitle() ?></p>
+        </div>
         <div class="col-12 col-md-6 px-0">
             <img src="<?= getBookImageUrl($book->getImage()) ?>" class="img-fluid w-100" alt="<?= $book->getTitle() ?>">
         </div>
-        <div class="col-12 col-md-6 px-4 px-lg-0">
+        <div class="col-12 col-md-6 px-3 px-lg-0">
             <div class="w-100">
                 <div class="mx-0 mt-5 mx-lg-5 p-0 p-lg-3 pe-lg-5">
                     <h2 class="mb-3"><?= $book->getTitle() ?></h2>
@@ -29,11 +33,10 @@
                 </div>
             </div>
         </div>
-
     </div>
     
     <div class="modal fade" id="loginModal" tabindex="-1">
-        <div class="modal-dialog">
+        <div class="modal-dialog mt-5">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-4" id="exampleModalFullscreenXxlLabel">Envie de lire ce livre ?</h1>
@@ -47,10 +50,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
