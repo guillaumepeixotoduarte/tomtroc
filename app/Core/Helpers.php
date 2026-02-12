@@ -55,7 +55,7 @@
      */
     function checkAccessNotLogged(string $controller, string $action) {
 
-        $public_routes = [
+        $publicRoutes = [
             'home' => ['index'],
             'nos-livres' => ['index'],
             'book' => ['detail'], // book/detail/{id}
@@ -67,7 +67,7 @@
         ];
 
         $actionToCheck = is_numeric($action) ? 'index' : $action;
-        $isPublic = isset($public_routes[$controller]) && in_array($actionToCheck, $public_routes[$controller]);
+        $isPublic = isset($publicRoutes[$controller]) && in_array($actionToCheck, $publicRoutes[$controller]);
     
         if (!$isPublic && !isLogged()) {
             $_SESSION['error'] = "Veuillez vous connecter pour accéder à cette page.";

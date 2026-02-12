@@ -17,7 +17,7 @@
                         <div class="flex-grow-1 overflow-auto">
                             <?php if(!empty($conversations)): ?>
                                 <?php foreach($conversations as $conversation): ?>
-                                    <a class="d-flex w-100 px-4 border-bottom border-white text-black text-decoration-none py-3 <?= (!empty($active_id) && $active_id == $conversation->getId()) ? 'bg-white' : '' ?>" href="<?= url('messagerie/conversation/'.$conversation->getId()) ?>">
+                                    <a class="d-flex w-100 px-4 border-bottom border-white text-black text-decoration-none py-3 <?= (!empty($activeId) && $activeId == $conversation->getId()) ? 'bg-white' : '' ?>" href="<?= url('messagerie/conversation/'.$conversation->getId()) ?>">
                                         <img class="profile-img-small rounded-circle me-3" src="<?= !empty($conversation->getContact()->getProfilImage()) ? getProfileImageUrl($conversation->getContact()->getProfilImage()) : url('img/default-profil-image.png') ?>">
                                         <div class="w-100 d-inline-grid ">
                                             <div class="d-flex justify-content-between mt-1">

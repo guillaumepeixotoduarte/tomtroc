@@ -70,8 +70,8 @@ class BookController extends Controller {
         $imageName = $existingBook ? $existingBook->getImage() : null;
 
         // On vérifie si une image est passé
-        if (!empty($_FILES['cover_image']['name'])) {
-            $uploadedFile = $this->uploadImage($_FILES['cover_image'], 'book_cover', 'book_');
+        if (!empty($_FILES['coverImage']['name'])) {
+            $uploadedFile = $this->uploadImage($_FILES['coverImage'], 'book_cover', 'book_');
             
             if ($uploadedFile) {
                 // On mémorise l'ancienne image pour la supprimer plus tard

@@ -38,7 +38,7 @@ class BookManager {
 
         $book = new Book($row);
         if ($includeUser && isset($row['username'])) {
-            $book->setOwner(new User(['username' => $row['username'], 'profil_image' => $row['profil_image'] ?? null]));
+            $book->setOwner(new User(['username' => $row['username'], 'profilImage' => $row['profil_image'] ?? null]));
         }
 
         return $book;

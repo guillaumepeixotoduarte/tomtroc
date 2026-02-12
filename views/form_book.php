@@ -8,12 +8,11 @@
                     <img id="preview-image" src="<?= !empty($book) ? getBookImageUrl($book->getImage()) : '../img/default-book-image.jpg' ?>" alt="Aperçu" class="img-fluid">
                 </div>
                 <label for="cover-image" class="d-block text-end text-black text-decoration-underline cursor-pointer mt-2"><?= !empty($book) ? 'Modifier' : 'Ajouter' ?> l'image</label>
-                <input type="file" id="cover-image" name="cover_image" class="" accept="image/*" <?= empty($book) ? 'required' : '' ?>>
+                <input type="file" id="cover-image" name="coverImage" class="" accept="image/*" <?= empty($book) ? 'required' : '' ?>>
             </div>
             <div class="col-12 col-lg-6">
                 <?php if (!empty($book)): ?>
                     <input type="hidden" name="id" value="<?= $book->getId() ?>">
-                    <input type="hidden" name="current_cover" value="<?= $book->getImage() ?>">
                 <?php endif; ?>
                 <?php if(isset($_SESSION['error'])): ?>
                     <div class="alert alert-danger mb-3 mt-2"><?= $_SESSION['error']; unset($_SESSION['error']); ?></div>

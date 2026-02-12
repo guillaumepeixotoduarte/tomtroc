@@ -54,7 +54,7 @@ switch ($params[0]) {
     case 'login':
         require_once '../app/Controllers/UserController.php';
         $controller = new UserController();
-        $controller->login_page();
+        $controller->loginPage();
         break;
 
     case 'login-user':
@@ -118,11 +118,11 @@ switch ($params[0]) {
         }elseif($action == 'envoi'){
             $controller->handlePostMessage();
         }elseif($action == 'contact'){
-            $id_contact = (isset($params[2]) && is_numeric($params[2])) ? $params[2] : null; 
-            $controller->contactOwner($id_contact);
+            $idContact = (isset($params[2]) && is_numeric($params[2])) ? $params[2] : null; 
+            $controller->contactOwner($idContact);
         }elseif($action == 'conversation'){
-            $id_conversation = (isset($params[2]) && is_numeric($params[2])) ? $params[2] : null; 
-            $controller->conversationWithOtherUser($id_conversation);
+            $idConversation = (isset($params[2]) && is_numeric($params[2])) ? $params[2] : null; 
+            $controller->conversationWithOtherUser($idConversation);
         }
 
         break;

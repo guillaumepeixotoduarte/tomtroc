@@ -52,7 +52,7 @@ class MessagerieController extends Controller {
         ]);
     }
 
-    public function conversationWithOtherUser(int $conversation_id){
+    public function conversationWithOtherUser(int $conversationId){
         $senderId = $_SESSION['user']['id'];
         $userManager = new UserManager();
         $participantManager = new ParticipantManager();
@@ -60,20 +60,20 @@ class MessagerieController extends Controller {
         $messageManager = new MessageManager();
 
         // cette fonction permet de récupérer l'autre utilisateur avec qui on a la conversation, si on est bien le 2e participant
-        $recipientId = $participantManager->getRecipientId($conversation_id, $_SESSION['user']['id']);
+        $recipientId = $participantManager->getRecipientId($conversationId, $_SESSION['user']['id']);
 
         if(!$recipientId){
             redirect('messagerie');
         }
 
         $recipientUser = $userManager->findById($recipientId);
-        $messages = $messageManager->findAllMessagesByConversation($conversation_id);
+        $messages = $messageManager->findAllMessagesByConversation($conversationId);
 
-        $messageManager->markAsRead($conversation_id, $_SESSION['user']['id']);
+        $messageManager->markAsRead($conversationId, $_SESSION['user']['id']);
 
         return $this->render('message_page', [
             'recipientUser' => $recipientUser,
-            'active_id' => $conversation_id,
+            'activeId' => $conversationId,
             'messages' => $messages,
             'conversations' => $conversationManager->findAllConversationsByUser($senderId),
             'unreadConversation' => $conversationManager->findUnreadConversations((int)$_SESSION['user']['id'])

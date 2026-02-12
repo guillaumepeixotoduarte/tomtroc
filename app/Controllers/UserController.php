@@ -17,7 +17,7 @@ class UserController extends Controller {
         ]);
     }
 
-    public function login_page() {
+    public function loginPage() {
         $this->render('login', [
             'title' => 'Se connecter'
         ]);
@@ -76,7 +76,7 @@ class UserController extends Controller {
                     'id' => $user->getId(),
                     'username' => $user->getUsername(),
                     'email' => $user->getEmail(),
-                    'profil_image' => $user->getProfilImage(),
+                    'profilImage' => $user->getProfilImage(),
                     'role' => $user->getRole()
                 ];
 
@@ -213,7 +213,7 @@ class UserController extends Controller {
             $this->deleteImage($actualImage, 'profile_image');
         }
         // Mettre à jour la session
-        $_SESSION['user']['profil_image'] = $newName;
+        $_SESSION['user']['profilImage'] = $newName;
         
         redirect('my-profile');
     }

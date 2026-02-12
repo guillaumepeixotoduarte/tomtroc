@@ -9,8 +9,8 @@ class User extends Entity {
     private string $username;
     private string $email;
     private string $password;
-    private string|null $profil_image;
-    private string $created_at;
+    private string|null $profilImage;
+    private string $createdAt;
     private string $role;
 
     /**
@@ -58,12 +58,12 @@ class User extends Entity {
         $this->email = $email;
     }
     
-    public function setProfilImage(?string $profil_image): void {
-        $this->profil_image = $profil_image;
+    public function setProfilImage(?string $profilImage): void {
+        $this->profilImage = $profilImage;
     }
 
     public function getProfilImage(): ?string {
-        return $this->profil_image;
+        return $this->profilImage;
     }
 
     public function getPassword(): string {
@@ -75,11 +75,11 @@ class User extends Entity {
     }
 
     public function getCreatedAt(): string {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(string $created_at): void {
-        $this->created_at = $created_at;
+    public function setCreatedAt(string $createdAt): void {
+        $this->createdAt = $createdAt;
     }
 
     public function getRole(): string {
