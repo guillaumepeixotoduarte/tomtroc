@@ -356,7 +356,7 @@ nav{
 /* ------ Footer ------- */
 
 footer{
-    height: 60px;
+    min-height: 60px;
 }
 
 footer img{
