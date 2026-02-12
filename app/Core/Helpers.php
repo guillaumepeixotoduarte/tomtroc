@@ -66,9 +66,9 @@
             'inscription-save' => ['index']
         ];
 
-        $isPublic = isset($public_routes[$controller]) && in_array($action, $public_routes[$controller]);
+        $actionToCheck = is_numeric($action) ? 'index' : $action;
+        $isPublic = isset($public_routes[$controller]) && in_array($actionToCheck, $public_routes[$controller]);
     
-
         if (!$isPublic && !isLogged()) {
             $_SESSION['error'] = "Veuillez vous connecter pour accéder à cette page.";
             header('Location: ' . url('login'));
