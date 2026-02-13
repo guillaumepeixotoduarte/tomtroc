@@ -4,12 +4,15 @@
         <div class="col-12 main-bg-color p-3 d-none d-md-block">
             <p class="max-width-1140 mb-0 mx-auto font-size-10 grey-text">Nos livres > <?= $book->getTitle() ?></p>
         </div>
-        <div class="col-12 col-md-6 px-0">
+        <div class="col-12 col-md-6 px-0 position-relative">
             <img src="<?= getBookImageUrl($book->getImage()) ?>" class="img-fluid w-100" alt="<?= $book->getTitle() ?>">
+            <?php if(!$book->getStatutExchange()): ?>
+                <span class="indisponible-badge indisp-badge-card">non dispo.</span>
+            <?php endif; ?>
         </div>
         <div class="col-12 col-md-6 px-3 px-lg-0">
             <div class="w-100">
-                <div class="mx-0 mt-5 mx-lg-5 p-0 p-lg-3 pe-lg-5">
+                <div class="mx-0 mt-5 mx-lg-5 p-0 p-lg-3 pe-lg-5 mb-5">
                     <h2 class="mb-3"><?= $book->getTitle() ?></h2>
                     <p class="font-size-16 grey-text">par <?= $book->getAuthor() ?></p>
                     <hr class="short-line my-4">
@@ -22,11 +25,11 @@
                     </a>
 
                     <?php if (isset($_SESSION['user']) && $_SESSION['user']['id'] !== $book->getUserId()): ?>
-                        <a href="<?= url('messagerie/contact/' . $book->getUserId()) ?>" class="classic-button green-button text-decoration-none w-100 d-block mt-5 text-center">
+                        <a href="<?= url('messagerie/contact/' . $book->getUserId()) ?>" class="classic-button green-button text-decoration-none w-100 d-block my-5 text-center">
                             Envoyer un message
                         </a>
                     <?php elseif(!isset($_SESSION['user'])): ?>
-                        <button type="button" class="classic-button green-button text-decoration-none w-100 mt-5" data-bs-toggle="modal" data-bs-target="#loginModal">
+                        <button type="button" class="classic-button green-button text-decoration-none w-100 my-5" data-bs-toggle="modal" data-bs-target="#loginModal">
                             Envoyer un message
                         </button>
                     <?php endif; ?>
