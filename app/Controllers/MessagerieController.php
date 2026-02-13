@@ -16,9 +16,11 @@ use App\Managers\ParticipantManager;
 
 class MessagerieController extends Controller {
 
+    /** Affichage de la messagerie ( ici uniquement les discussions en cours )
+     * @return void 
+     */
     public function index(){
         $senderId = $_SESSION['user']['id'];
-        $messageManager = new MessageManager();
         $conversationManager = new ConversationManager();
 
         return $this->render('message_page', [
@@ -27,23 +29,28 @@ class MessagerieController extends Controller {
         ]);
     }
 
+    /** Affichage de la messagerie pour un premier message, si une conversation existe avec le correspondant alors on est rediriger vers elle
+     * @param int $recipientId L'ID de l'utilisateur que l'on souhaite contacter
+     * @return void 
+     */
     public function contactOwner(int $recipientId) {
 
         $senderId = $_SESSION['user']['id'];
         $userManager = new UserManager();
         $conversationManager = new ConversationManager();
+        $participantManager = new ParticipantManager();
 
         $recipientUser = $userManager->findById($recipientId);
 
-        // 1. Est-ce qu'on a déjà discuté ensemble ?
-        $existingId = $conversationManager->getConversationIdBetweenTwoUsers($senderId, $recipientId);
+        // On vérifie si on a déja une conversation en cours avec l'utilisateur que l'on souhaite contacté
+        $existingId = $participantManager->findConversationBetween($senderId, $recipientId);
 
         if ($existingId) {
             // Si oui, on va directement sur la conversation
             redirect('messagerie/conversation/' . $existingId);
         }
 
-        // 2. Si non, on affiche l'interface "Premier Message"
+        // Si non, on affiche l'interface "Premier Message"
         // On peut passer l'ID du destinataire à la vue pour le formulaire
         return $this->render('message_page', [
             'recipientUser' => $recipientUser,
@@ -52,6 +59,10 @@ class MessagerieController extends Controller {
         ]);
     }
 
+    /** Affichage de la conversation avec un autre utilisateur
+     * @param int $conversationId L'ID de la conversation que l'on souhaite afficher
+     * @return void 
+     */
     public function conversationWithOtherUser(int $conversationId){
         $senderId = $_SESSION['user']['id'];
         $userManager = new UserManager();
@@ -69,6 +80,7 @@ class MessagerieController extends Controller {
         $recipientUser = $userManager->findById($recipientId);
         $messages = $messageManager->findAllMessagesByConversation($conversationId);
 
+        // Cette fonction va passer les messages non-lu en lu
         $messageManager->markAsRead($conversationId, $_SESSION['user']['id']);
 
         return $this->render('message_page', [
@@ -80,11 +92,15 @@ class MessagerieController extends Controller {
         ]);
     }
 
+    /** Fonction qui s'occupe d'enregister le message
+     * @param int $conversationId L'ID de la conversation que l'on souhaite afficher
+     * @return void 
+     */
     public function handlePostMessage() 
     {
         $content = trim($_POST['messageContent']);
         $receiverId = (int)$_POST['recipientId']; // L'ID de l'autre personne
-        $senderId = $_SESSION['user']['id'];       // Ton ID
+        $senderId = $_SESSION['user']['id'];  // Ton ID
 
         if(empty($receiverId)){
             redirect('messagerie');
@@ -92,6 +108,7 @@ class MessagerieController extends Controller {
 
         $messageManager = new MessageManager();
         $participantManager = new ParticipantManager();
+
         $conversationId = $participantManager->findConversationBetween($senderId, $receiverId);
 
         $redirectPath = $conversationId ? "messagerie/conversation/$conversationId" : "messagerie/contact/$receiverId";
@@ -107,6 +124,7 @@ class MessagerieController extends Controller {
             } else {
                 // Ici, le manager renvoie l'ID ou explose en cas d'erreur
                 $conversationId = $messageManager->createFullConversation($senderId, $receiverId, $content);
+                $redirectPath = "messagerie/conversation/$conversationId";
             }
 
             // Succès : Redirection unique

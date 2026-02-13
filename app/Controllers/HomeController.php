@@ -8,6 +8,10 @@ use App\Core\Controller;
 use App\Managers\BookManager;
 
 class HomeController extends Controller {
+
+    /** Affichage de la Homepage
+     * @return void 
+     */
     public function index() {
         // Données à transmettre à la vue
         $title = "Page d'accueil";

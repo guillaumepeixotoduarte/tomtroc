@@ -11,18 +11,27 @@ use App\Core\Controller;
 
 class UserController extends Controller {
     
+    /** Affiche la page d'inscription
+     * @return void 
+     */
     public function register() {
         $this->render('inscription', [
             'title' => 'Créer un compte'
         ]);
     }
 
+    /** Affiche la page de connexion
+     * @return void 
+     */
     public function loginPage() {
         $this->render('login', [
             'title' => 'Se connecter'
         ]);
     }
 
+    /** Affiche la page pour consulter notre profil
+     * @return void 
+     */
     public function myProfilePage() {
 
         $userManager = new UserManager();
@@ -39,6 +48,7 @@ class UserController extends Controller {
 
     /** Affiche le profil d'un utilisateur spécifique (accessible via /profile/{id})
      * @param int|null $id L'ID de l'utilisateur à afficher
+     * @return void 
      */
     public function profilePage(int $id): void {
 
@@ -59,6 +69,9 @@ class UserController extends Controller {
         ]);
     }
 
+    /** Cette fonction vérifie les données passées lors de la connexion
+     * @return void 
+     */
     public function auth() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
@@ -88,6 +101,9 @@ class UserController extends Controller {
         }
     }
 
+    /** Cette fonction vérifie les données passées lors de l'inscription
+     * @return void 
+     */
     public function saveUser() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // 1. Récupération et nettoyage
@@ -127,6 +143,9 @@ class UserController extends Controller {
         }
     }
 
+    /** Cette fonction gère la mise à jour des données de l'utilisateur lorsqu'il souhaite les modifiées
+     * @return void 
+     */
     public function updateProfile(){
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             redirect('my-profile');
@@ -172,6 +191,9 @@ class UserController extends Controller {
 
     }
 
+    /** Cette fonction gère la mise à jour de la photo de profil de l'utilisateur lorsqu'il souhaite la modifiée
+     * @return void 
+     */
     public function updateProfileImage(){
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             redirect('my-profile');

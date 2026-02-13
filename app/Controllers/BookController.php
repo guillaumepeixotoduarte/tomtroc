@@ -10,7 +10,10 @@ use App\Core\Controller;
 
 class BookController extends Controller {
     
-    // Page : Détails d'un livre spécifique
+    /** Affiche la page avec les détails d'un livre spécifique, si le livre n'est pas trouvé on renvoie sur la liste des livres (accessible via /book/detail/{id})
+     * @param int $id L'ID du livre à afficher
+     * @return void 
+     */
     public function show($id) {
 
         $bookManager = new BookManager();
@@ -27,6 +30,9 @@ class BookController extends Controller {
         ]);
     }
 
+    /** Affiche la page avec la liste des livres
+     * @return void
+     */
     public function ourBooks() {
         $bookManager = new BookManager();
 
@@ -40,6 +46,10 @@ class BookController extends Controller {
         ]);
     }
 
+    /** Affiche le formulaire d'ajout / Modification
+     * @param int|null $id L'ID du livre à modifier, si null alors ce sera un ajout
+     * @return void 
+     */
     public function edit($id = null) {
         $bookManager = new BookManager();
         $book = null;
@@ -62,6 +72,9 @@ class BookController extends Controller {
         ]);
     }
 
+    /** Enregistrement des informations pour la modification ou l'ajout d'un livre
+     * @return void 
+     */
     public function saveBook() {
         $bookManager = new BookManager();
         $id = $_POST['id'] ?? null;
@@ -88,7 +101,7 @@ class BookController extends Controller {
             redirect($id ? 'book/edit/'.$id : 'book/edit');
         }
 
-        // 4. Enregistrement unique
+        // Enregistrement unique
         if ($bookManager->save($_POST, $imageName)) {
             // Si tout est OK, on nettoie l'ancienne image si elle a été remplacée
             if (!empty($oldImageToDelete)) {
@@ -103,6 +116,10 @@ class BookController extends Controller {
         redirect($id ? 'book/edit/'.$id : 'book/edit');
     }
 
+    /** Permet de supprimer un livre
+     * @param int|null $id L'ID du livre à supprimer
+     * @return void 
+     */
     public function deleteBook(int $id){
         
         $bookManager = new BookManager();
