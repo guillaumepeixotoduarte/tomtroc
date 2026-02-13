@@ -118,18 +118,4 @@ class ConversationManager {
         return $stmt->fetchAll(\PDO::FETCH_KEY_PAIR);
         // Retourne par ex: [1 => 12, 4 => 2, ...]
     }
-
-    public function getConversationIdBetweenTwoUsers(int $userId1, int $userId2): ?int 
-    {
-        $sql = "SELECT p1.conversation_id 
-                FROM participants p1
-                INNER JOIN participants p2 ON p1.conversation_id = p2.conversation_id
-                WHERE p1.user_id = :user1 AND p2.user_id = :user2";
-        
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute(['user1' => $userId1, 'user2' => $userId2]);
-        $result = $stmt->fetch();
-
-        return $result ? (int)$result['conversation_id'] : null;
-    }
 }
