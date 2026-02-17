@@ -28,6 +28,9 @@
                     <a href="<?= url('book/detail/' . $book->getId()) ?>" class="col text-decoration-none text-black">
                         <div class="card border-0 rounded-bottom h-100">
                             <img src="<?= getBookImageUrl($book->getImage()) ?>" alt="<?= $book->getTitle() ?>" class="w-100">
+                            <?php if(!$book->getStatutExchange()): ?>
+                                <span class="indisponible-badge indisp-badge-card">non dispo.</span>
+                            <?php endif; ?>
                             <div class="card-body text-start">
                                 <p class="font-size-14 mb-2"><?= $book->getTitle() ?></p>
                                 <p class="card-text grey-text font-size-12"><?= $book->getAuthor() ?></p>
